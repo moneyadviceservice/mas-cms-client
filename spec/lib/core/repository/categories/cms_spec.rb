@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Categories::CMS do
+RSpec.describe Mas::Cms::Repository::Categories::CMS do
   describe '#all' do
     it 'returns lots of categories' do
       expected = [
@@ -30,7 +30,7 @@ RSpec.describe Core::Repository::Categories::CMS do
 
     context 'when category does not exist' do
       it 'raises an exception' do
-        expect { subject.find('idonotexist') }.to raise_error(Core::Repository::Base::RequestError)
+        expect { subject.find('idonotexist') }.to raise_error(Mas::Cms::Repository::Base::RequestError)
       end
     end
 

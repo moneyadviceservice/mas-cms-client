@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe CategoryReader, '#call' do
     subject { described_class.new(id) }
 
@@ -109,7 +109,7 @@ module Core
     context 'when category is redirected' do
       let(:repository_double) do
         repo = double
-        allow(repo).to receive(:find).and_raise(Core::Repository::CMS::Resource301Error.new('https://example.com'))
+        allow(repo).to receive(:find).and_raise(Mas::Cms::Repository::CMS::Resource301Error.new('https://example.com'))
         repo
       end
 

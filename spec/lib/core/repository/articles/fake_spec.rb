@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Articles::Fake do
+RSpec.describe Mas::Cms::Repository::Articles::Fake do
   let(:article) { build :article_hash }
   let(:invalid_id) { 'fake' }
   let(:repository) { described_class.new(article) }
@@ -11,7 +11,7 @@ RSpec.describe Core::Repository::Articles::Fake do
       specify { expect(subject['id']).to eq(article['id']) }
 
       it 'instantiates a valid Article' do
-        expect(Core::Article.new(subject['id'], subject)).to be_valid
+        expect(Mas::Cms::Article.new(subject['id'], subject)).to be_valid
       end
     end
 

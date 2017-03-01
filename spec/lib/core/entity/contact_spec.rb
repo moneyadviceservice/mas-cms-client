@@ -1,4 +1,4 @@
-RSpec.describe Core::Contact, type: :model do
+RSpec.describe Mas::Cms::Contact, type: :model do
   let(:params) do
     {
       heading: 'Call us!',

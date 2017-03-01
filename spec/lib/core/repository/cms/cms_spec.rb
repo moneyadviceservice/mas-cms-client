@@ -1,4 +1,4 @@
-module Core::Repository::CMS
+module Mas::Cms::Repository::CMS
   RSpec.describe Resource302Error do
     subject { described_class.new('https://example.com') }
 
@@ -11,7 +11,7 @@ module Core::Repository::CMS
     end
 
     it 'stores error message' do
-      expect(subject.message).to eql('Core::Repository::CMS::Resource302Error')
+      expect(subject.message).to eql('Mas::Cms::Repository::CMS::Resource302Error')
     end
   end
 
@@ -49,13 +49,13 @@ module Core::Repository::CMS
         end
 
         it 'raises a request error' do
-          expect { subject.find('server-down') }.to raise_error Core::Repository::Base::RequestError
+          expect { subject.find('server-down') }.to raise_error Mas::Cms::Repository::Base::RequestError
         end
       end
 
       context 'when article is a 301 redirect' do
         it 'raises Resource301Error' do
-          expect { subject.find('understanding-your-first-payslip') }.to raise_error Core::Repository::CMS::Resource301Error
+          expect { subject.find('understanding-your-first-payslip') }.to raise_error Mas::Cms::Repository::CMS::Resource301Error
         end
 
         it 'returns status of 301' do
@@ -73,7 +73,7 @@ module Core::Repository::CMS
 
       context 'when article is a 302 redirect' do
         it 'raises Resource302Error' do
-          expect { subject.find('pensions-for-the-self-employed') }.to raise_error Core::Repository::CMS::Resource302Error
+          expect { subject.find('pensions-for-the-self-employed') }.to raise_error Mas::Cms::Repository::CMS::Resource302Error
         end
 
         it 'returns status of 302' do

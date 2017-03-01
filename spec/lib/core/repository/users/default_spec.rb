@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Repository::Users::Default do
     describe '#update_from_crm' do
       context 'when customer_id is blank' do

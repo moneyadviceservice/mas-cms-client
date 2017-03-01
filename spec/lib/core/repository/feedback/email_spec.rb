@@ -1,9 +1,9 @@
-RSpec.describe Core::Repository::Feedback::Email do
+RSpec.describe Mas::Cms::Repository::Feedback::Email do
   let(:connection) { double }
   subject(:repository) { described_class.new }
 
   before do
-    allow(Core::Registry::Connection).to receive(:[]).with(:internal_email) do
+    allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:internal_email) do
       connection
     end
   end

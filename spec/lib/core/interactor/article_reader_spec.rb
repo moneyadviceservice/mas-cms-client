@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe ArticleReader do
     subject { described_class.new(id) }
 
@@ -81,10 +81,10 @@ module Core
         end
       end
 
-      context 'when find raises Core::Repository::CMS::Resource301Error' do
+      context 'when find raises Mas::Cms::Repository::CMS::Resource301Error' do
         let(:repository_double) do
           repo = double
-          allow(repo).to receive(:find).and_raise(Core::Repository::CMS::Resource301Error.new('https://example.com'))
+          allow(repo).to receive(:find).and_raise(Mas::Cms::Repository::CMS::Resource301Error.new('https://example.com'))
           repo
         end
 
@@ -107,10 +107,10 @@ module Core
         end
       end
 
-      context 'when find raises Core::Repository::CMS::Resource302Error' do
+      context 'when find raises Mas::Cms::Repository::CMS::Resource302Error' do
         let(:repository_double) do
           repo = double
-          allow(repo).to receive(:find).and_raise(Core::Repository::CMS::Resource302Error.new('https://example.com'))
+          allow(repo).to receive(:find).and_raise(Mas::Cms::Repository::CMS::Resource302Error.new('https://example.com'))
           repo
         end
 

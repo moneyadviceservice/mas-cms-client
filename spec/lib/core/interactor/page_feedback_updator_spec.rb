@@ -1,9 +1,9 @@
-RSpec.describe Core::PageFeedbackUpdator do
+RSpec.describe Mas::Cms::PageFeedbackUpdator do
   let(:params) { {} }
 
   describe '#call' do
     context 'when feedback is updated' do
-      let(:page_feedback) { Core::PageFeedback.new(data['id'], data) }
+      let(:page_feedback) { Mas::Cms::PageFeedback.new(data['id'], data) }
       let(:data) do
         { 'id' => 2, 'liked' => true }
       end

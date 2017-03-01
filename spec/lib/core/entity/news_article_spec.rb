@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe NewsArticle, type: :model do
     subject { described_class.new('news_article_id', attributes) }
 

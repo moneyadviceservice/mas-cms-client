@@ -1,4 +1,4 @@
-module Core::Repository::CMS
+module Mas::Cms::Repository::CMS
   RSpec.describe BlockComposer do
     let(:id) { 'content' }
     subject(:composer) { described_class.new(blocks, id) }

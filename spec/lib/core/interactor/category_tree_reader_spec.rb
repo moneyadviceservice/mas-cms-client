@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe CategoryTreeReader, '#call' do
     subject(:category_tree_reader) { described_class.new }
 
@@ -53,7 +53,7 @@ module Core
 
         it 'contains the first category' do
           expect(child_category_node.name).to eq('life-events')
-          expect(child_category_node.content).to be_a(Core::Category)
+          expect(child_category_node.content).to be_a(Mas::Cms::Category)
         end
 
         describe 'first grandchild category' do
@@ -63,7 +63,7 @@ module Core
 
           it 'contains the first category' do
             expect(grandchild_category_node.name).to eq('setting-up-home')
-            expect(grandchild_category_node.content).to be_a(Core::Category)
+            expect(grandchild_category_node.content).to be_a(Mas::Cms::Category)
           end
         end
       end

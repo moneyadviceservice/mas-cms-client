@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   module Feedback
     RSpec.describe Base do
       subject { described_class.new(double) }

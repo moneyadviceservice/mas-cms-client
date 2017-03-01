@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe NewsReader do
     subject(:news_reader) { described_class.new(options) }
 

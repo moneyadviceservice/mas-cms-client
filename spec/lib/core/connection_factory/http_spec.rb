@@ -1,8 +1,8 @@
-RSpec.describe Core::ConnectionFactory::Http, '.build' do
+RSpec.describe Mas::Cms::ConnectionFactory::Http, '.build' do
   subject(:factory) { described_class.build('http://example.com') }
 
-  it "manufactures a `Core::Connection::Http'" do
-    expect(factory).to be_a(Core::Connection::Http)
+  it "manufactures a `Mas::Cms::Connection::Http'" do
+    expect(factory).to be_a(Mas::Cms::Connection::Http)
   end
 
   it 'has a timeout between 5 and 12 seconds' do

@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   module Interactors
     module Customer
       RSpec.describe Updater do
@@ -27,7 +27,7 @@ module Core
               subject = described_class.new(user)
               subject.call
 
-              customer = Core::Registry::Repository[:customer].find(id: user.customer_id)
+              customer = Mas::Cms::Registry::Repository[:customer].find(id: user.customer_id)
               expect(customer.first_name).to eql(first_name)
             end
           end

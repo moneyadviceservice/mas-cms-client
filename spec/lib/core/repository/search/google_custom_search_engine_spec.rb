@@ -1,4 +1,4 @@
-module Core::Repository::Search
+module Mas::Cms::Repository::Search
   RSpec.describe GoogleCustomSearchEngine do
     let(:key) { double }
     let(:cx_en) { double }
@@ -10,7 +10,7 @@ module Core::Repository::Search
     let(:mapped_response) { double }
 
     before do
-      allow(Core::Registry::Connection).to receive(:[]).with(:google_api) { connection }
+      allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:google_api) { connection }
       allow_any_instance_of(GoogleCustomSearchEngine::ResponseMapper)
         .to receive(:mapped_response).and_return(mapped_response)
     end
@@ -36,7 +36,7 @@ module Core::Repository::Search
 
       context 'when there is an error' do
         before do
-          allow(connection).to receive(:get).and_raise(Core::Connection::Http::ClientError)
+          allow(connection).to receive(:get).and_raise(Mas::Cms::Connection::Http::ClientError)
         end
 
         it 'raises a request error' do

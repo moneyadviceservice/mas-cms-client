@@ -1,4 +1,4 @@
-module Core::Repository::StaticPages
+module Mas::Cms::Repository::StaticPages
   RSpec.describe Cms do
     let(:url) { 'https://example.com/path/to/url' }
 
@@ -9,8 +9,8 @@ module Core::Repository::StaticPages
       let(:headers) { {} }
 
       before do
-        allow(Core::Registry::Connection).to receive(:[]).with(:cms) do
-          Core::ConnectionFactory::Http.build(url)
+        allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:cms) do
+          Mas::Cms::ConnectionFactory::Http.build(url)
         end
 
         stub_request(:get, "https://example.com/api/en/corporate/#{id}.json")
@@ -56,7 +56,7 @@ module Core::Repository::StaticPages
         let(:status) { 407 }
 
         it 'raises an API::RequestError' do
-          expect { repository.find(id) }.to raise_error(::Core::Repository::Base::RequestError)
+          expect { repository.find(id) }.to raise_error(::Mas::Cms::Repository::Base::RequestError)
         end
       end
 
@@ -65,7 +65,7 @@ module Core::Repository::StaticPages
         let(:status) { 500 }
 
         it 'raises an API::RequestError' do
-          expect { repository.find(id) }.to raise_error(::Core::Repository::Base::RequestError)
+          expect { repository.find(id) }.to raise_error(::Mas::Cms::Repository::Base::RequestError)
         end
       end
     end

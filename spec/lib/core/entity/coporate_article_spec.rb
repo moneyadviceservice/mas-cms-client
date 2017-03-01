@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe CorporateArticle, type: :model do
     subject { described_class.new(double, attributes) }
 

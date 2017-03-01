@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Customer, type: :model do
     subject { described_class.new(customer_id, attributes) }
 

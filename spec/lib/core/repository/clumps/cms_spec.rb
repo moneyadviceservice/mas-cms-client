@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Clumps::CMS do
+RSpec.describe Mas::Cms::Repository::Clumps::CMS do
   describe '#all' do
     let(:expected_clump_names) do
       [

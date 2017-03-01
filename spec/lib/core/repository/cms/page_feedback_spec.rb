@@ -1,7 +1,7 @@
-module Core::Repository::CMS
+module Mas::Cms::Repository::CMS
   RSpec.describe PageFeedback do
     describe '#create' do
-      subject { Core::Repository::CMS::PageFeedback.new.create(params) }
+      subject { Mas::Cms::Repository::CMS::PageFeedback.new.create(params) }
 
       context 'when valid' do
         let(:params) do

@@ -1,4 +1,4 @@
-RSpec.describe Core::WebChat, type: :model do
+RSpec.describe Mas::Cms::WebChat, type: :model do
   let(:params) do
     {
       heading: 'Web Chat',

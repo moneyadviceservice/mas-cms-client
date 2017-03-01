@@ -1,5 +1,5 @@
-RSpec.describe Core::Repository::Cache do
-  let(:repository) { instance_double('Core::Repositories::Test') }
+RSpec.describe Mas::Cms::Repository::Cache do
+  let(:repository) { instance_double('Mas::Cms::Repositories::Test') }
   let(:cache) { double }
   let(:contents) { 'the contents' }
   let(:locale) { :en }

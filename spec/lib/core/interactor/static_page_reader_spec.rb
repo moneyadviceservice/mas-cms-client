@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe StaticPageReader do
     subject { described_class.new(id) }
 

@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   module Feedback
     RSpec.describe Technical do
       let(:attributes) { double }

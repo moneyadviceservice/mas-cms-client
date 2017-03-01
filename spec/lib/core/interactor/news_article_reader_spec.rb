@@ -1,6 +1,6 @@
 require_relative 'shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   RSpec.describe NewsArticleReader do
     subject { described_class.new(id) }
 
@@ -57,7 +57,7 @@ module Core
 
       context 'when news article is a redirect' do
         let(:exception) do
-          Core::Repository::CMS::Resource302Error.new('https://example.com')
+          Mas::Cms::Repository::CMS::Resource302Error.new('https://example.com')
         end
 
         let(:repository_double) do

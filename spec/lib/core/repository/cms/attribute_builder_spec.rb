@@ -1,4 +1,4 @@
-module Core::Repository::CMS
+module Mas::Cms::Repository::CMS
   RSpec.describe AttributeBuilder do
     let(:body) { File.read('spec/fixtures/cms/beginners-guide-to-managing-your-money.json') }
     let(:response) { OpenStruct.new(body: JSON.parse(body)) }

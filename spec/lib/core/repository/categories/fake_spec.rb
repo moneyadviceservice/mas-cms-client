@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Categories::Fake do
+RSpec.describe Mas::Cms::Repository::Categories::Fake do
   let(:article) { build :article_hash }
   let(:subcategory) { build :category_hash, contents: [article] }
   let(:category) { build :category_hash, contents: [subcategory] }
@@ -24,12 +24,12 @@ RSpec.describe Core::Repository::Categories::Fake do
       specify { expect(subject['id']).to eq(category['id']) }
 
       it 'instantiates a valid Category' do
-        expect(Core::Category.new(subject['id'], subject)).to be_valid
+        expect(Mas::Cms::Category.new(subject['id'], subject)).to be_valid
       end
 
       it 'instantiates a valid Category from the subcategory' do
         subcategory = subject['contents'].first
-        expect(Core::Category.new(subcategory['id'], subcategory)).to be_valid
+        expect(Mas::Cms::Category.new(subcategory['id'], subcategory)).to be_valid
       end
 
       context 'when retrieving a subcategory' do

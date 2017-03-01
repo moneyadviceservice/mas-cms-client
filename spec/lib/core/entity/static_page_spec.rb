@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe StaticPage, type: :model do
     subject { described_class.new(double, attributes) }
 
@@ -16,7 +16,7 @@ module Core
 
     describe '#alternates' do
       it 'returns an array of alternates' do
-        expect(subject.alternates.first).to be_an_instance_of(Core::StaticPage::Alternate)
+        expect(subject.alternates.first).to be_an_instance_of(Mas::Cms::StaticPage::Alternate)
       end
     end
 

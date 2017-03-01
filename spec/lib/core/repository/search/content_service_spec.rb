@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Search::ContentService do
+RSpec.describe Mas::Cms::Repository::Search::ContentService do
   let(:url) { 'https://example.com/path/to/url' }
   let(:locale) { :en }
   let(:limit) { 25 }
@@ -6,10 +6,10 @@ RSpec.describe Core::Repository::Search::ContentService do
   let(:event_name) { 'request.content-service.search' }
 
   before do
-    connection = Core::ConnectionFactory::Http.build(url)
+    connection = Mas::Cms::ConnectionFactory::Http.build(url)
     connection.builder.delete(FaradayMiddleware::Instrumentation)
 
-    allow(Core::Registry::Connection).to receive(:[]).with(:content_service) { connection }
+    allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:content_service) { connection }
   end
 
   describe '#perform' do

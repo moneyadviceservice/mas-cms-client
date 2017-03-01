@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Repository::Customers::Fake do
     before :each do
       subject.clear

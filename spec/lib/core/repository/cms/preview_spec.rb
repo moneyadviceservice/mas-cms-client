@@ -1,4 +1,4 @@
-module Core::Repository::CMS
+module Mas::Cms::Repository::CMS
   RSpec.describe Preview do
     let(:url) { 'https://example.com' }
 
@@ -9,8 +9,8 @@ module Core::Repository::CMS
       let(:headers) { {} }
 
       before do
-        allow(Core::Registry::Connection).to receive(:[]).with(:cms) do
-          Core::ConnectionFactory::Http.build(url)
+        allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:cms) do
+          Mas::Cms::ConnectionFactory::Http.build(url)
         end
 
         stub_request(:get, "https://example.com/api/preview/#{I18n.locale}/#{id}.json")

@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   module Interactors
     RSpec.describe UserUpdater do
       let(:user) do
@@ -13,7 +13,7 @@ module Core
       describe '#call' do
         context 'when customer id is present' do
           it 'updates the user' do
-            customer = Core::Registry::Repository[:customer].customers.first
+            customer = Mas::Cms::Registry::Repository[:customer].customers.first
             customer[:first_name] = 'Philip'
 
             subject.call

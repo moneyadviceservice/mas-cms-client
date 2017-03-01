@@ -1,4 +1,4 @@
-RSpec.describe Core::ConnectionFactory::Smtp, '.build' do
+RSpec.describe Mas::Cms::ConnectionFactory::Smtp, '.build' do
   let(:smtp_server) { double }
   let(:connection) { double }
   let(:options) { double }
@@ -6,17 +6,17 @@ RSpec.describe Core::ConnectionFactory::Smtp, '.build' do
   subject(:factory) { described_class.build(options) }
 
   before do
-    allow(Core::ConnectionFactory::PseudoSmtpServer).to receive(:new) { smtp_server }
-    allow(Core::Connection::Smtp).to receive(:new) { connection }
+    allow(Mas::Cms::ConnectionFactory::PseudoSmtpServer).to receive(:new) { smtp_server }
+    allow(Mas::Cms::Connection::Smtp).to receive(:new) { connection }
   end
 
   it 'creates a pseudo smtp server connection with the passed in options' do
-    allow(Core::ConnectionFactory::PseudoSmtpServer).to receive(:new).with(options)
+    allow(Mas::Cms::ConnectionFactory::PseudoSmtpServer).to receive(:new).with(options)
     subject
   end
 
   it 'instantiates the smtp connection with the pseduo smtp server connection' do
-    expect(Core::Connection::Smtp).to receive(:new).with(smtp_server)
+    expect(Mas::Cms::Connection::Smtp).to receive(:new).with(smtp_server)
     subject
   end
 
@@ -25,7 +25,7 @@ RSpec.describe Core::ConnectionFactory::Smtp, '.build' do
   end
 end
 
-RSpec.describe Core::ConnectionFactory::PseudoSmtpServer do
+RSpec.describe Mas::Cms::ConnectionFactory::PseudoSmtpServer do
   let(:from_address) { double }
   let(:mail) { double.as_null_object }
   let(:config) { double }

@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe SearchResultCollection, type: :model do
     let(:items) { [] }
     let(:attributes) { { items: items } }

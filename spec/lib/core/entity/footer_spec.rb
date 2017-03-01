@@ -1,4 +1,4 @@
-RSpec.describe Core::Footer, type: :model do
+RSpec.describe Mas::Cms::Footer, type: :model do
   let(:params) do
     {
       label: 'Footer',
@@ -23,13 +23,13 @@ RSpec.describe Core::Footer, type: :model do
 
   describe '#web_chat' do
     it 'returns a WebChat object' do
-      expect(subject.web_chat).to be_a(Core::WebChat)
+      expect(subject.web_chat).to be_a(Mas::Cms::WebChat)
     end
 
     it "doesn't make multiple instances of web_chat if called multiple times" do
-      allow(Core::WebChat).to receive(:new).and_call_original
+      allow(Mas::Cms::WebChat).to receive(:new).and_call_original
       3.times { subject.web_chat }
-      expect(Core::WebChat).to have_received(:new).once
+      expect(Mas::Cms::WebChat).to have_received(:new).once
     end
 
     it { expect(subject.web_chat.heading).to eq('Web Chat') }
@@ -41,13 +41,13 @@ RSpec.describe Core::Footer, type: :model do
 
   describe '#contact' do
     it 'returns a Contact object' do
-      expect(subject.contact).to be_a(Core::Contact)
+      expect(subject.contact).to be_a(Mas::Cms::Contact)
     end
 
     it "doesn't make multiple instances of contact if called multiple times" do
-      allow(Core::Contact).to receive(:new).and_call_original
+      allow(Mas::Cms::Contact).to receive(:new).and_call_original
       3.times { subject.contact }
-      expect(Core::Contact).to have_received(:new).once
+      expect(Mas::Cms::Contact).to have_received(:new).once
     end
 
     it { expect(subject.contact.heading).to eq('Call Us') }

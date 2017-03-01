@@ -1,6 +1,6 @@
 require 'lib/core/interactor/shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   module Interactors
     module Customer
       RSpec.describe Creator do
@@ -39,10 +39,10 @@ module Core
           end
 
           context 'when customer does not exist' do
-            let(:saved_customer) { Core::Registry::Repository[:customer].find(id: user.customer_id) }
+            let(:saved_customer) { Mas::Cms::Registry::Repository[:customer].find(id: user.customer_id) }
 
             it 'creates them' do
-              expect { subject.call }.to change { Core::Registry::Repository[:customer].customers.size }.by(1)
+              expect { subject.call }.to change { Mas::Cms::Registry::Repository[:customer].customers.size }.by(1)
             end
 
             it 'sets the correct attributes' do

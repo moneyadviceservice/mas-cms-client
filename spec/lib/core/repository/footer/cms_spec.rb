@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::Footer::CMS do
+RSpec.describe Mas::Cms::Repository::Footer::CMS do
   describe '#find' do
     context 'when the footer exists' do
       it 'returns the footer' do
@@ -9,7 +9,7 @@ RSpec.describe Core::Repository::Footer::CMS do
 
     context 'when footer does not exist' do
       it 'raises an exception' do
-        expect { subject.find('idonotexist') }.to raise_error(Core::Repository::Base::RequestError)
+        expect { subject.find('idonotexist') }.to raise_error(Mas::Cms::Repository::Base::RequestError)
       end
     end
   end

@@ -1,6 +1,6 @@
 require 'lib/core/interactor/shared_examples/optional_failure_block'
 
-module Core
+module Mas::Cms
   module Interactors
     module Customer
       RSpec.describe Finder do
@@ -17,12 +17,12 @@ module Core
 
             before do
               allow(Registry::Repository).to receive(:[]).with(:customer) do
-                double(find: ::Core::Customer.new('known', data))
+                double(find: ::Mas::Cms::Customer.new('known', data))
               end
             end
 
             it 'returns a customer' do
-              expect(subject.call).to be_a(::Core::Customer)
+              expect(subject.call).to be_a(::Mas::Cms::Customer)
             end
 
             it 'returns the correct customer' do

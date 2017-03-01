@@ -1,10 +1,10 @@
-module Core::Repository::News
+module Mas::Cms::Repository::News
   RSpec.describe PublicWebsite do
     let(:url) { 'https://example.com/path/to/url' }
-    let(:connection) { Core::ConnectionFactory::Http.build(url) }
+    let(:connection) { Mas::Cms::ConnectionFactory::Http.build(url) }
 
     before do
-      allow(Core::Registry::Connection).to receive(:[]).with(:public_website) { connection }
+      allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:public_website) { connection }
     end
 
     describe '#find' do

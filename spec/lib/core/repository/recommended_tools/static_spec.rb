@@ -1,4 +1,4 @@
-RSpec.describe Core::Repository::RecommendedTools::Static do
+RSpec.describe Mas::Cms::Repository::RecommendedTools::Static do
   let(:tool_name) { :budget_planner }
   subject(:tool) { described_class.new(tool_name) }
 

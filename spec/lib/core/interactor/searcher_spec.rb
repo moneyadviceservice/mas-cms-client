@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Searcher do
     let(:query) { double }
     let(:page) { '1' }

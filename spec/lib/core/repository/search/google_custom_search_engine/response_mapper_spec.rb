@@ -1,4 +1,4 @@
-module Core::Repository::Search
+module Mas::Cms::Repository::Search
   RSpec.describe GoogleCustomSearchEngine::ResponseMapper do
 
     describe '#mapped_response' do

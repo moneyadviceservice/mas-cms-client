@@ -8,8 +8,8 @@ RSpec.shared_examples_for 'a cms resource' do
     let(:headers) { {} }
 
     before do
-      allow(Core::Registry::Connection).to receive(:[]).with(:cms) do
-        Core::ConnectionFactory::Http.build(url)
+      allow(Mas::Cms::Registry::Connection).to receive(:[]).with(:cms) do
+        Mas::Cms::ConnectionFactory::Http.build(url)
       end
 
       stub_request(
@@ -46,7 +46,7 @@ RSpec.shared_examples_for 'a cms resource' do
       let(:status) { 407 }
 
       it 'raises an RequestError' do
-        expect { repository.find(id) }.to raise_error(Core::Repository::Base::RequestError)
+        expect { repository.find(id) }.to raise_error(Mas::Cms::Repository::Base::RequestError)
       end
     end
 
@@ -55,7 +55,7 @@ RSpec.shared_examples_for 'a cms resource' do
       let(:status) { 500 }
 
       it 'raises an RequestError' do
-        expect { repository.find(id) }.to raise_error(Core::Repository::Base::RequestError)
+        expect { repository.find(id) }.to raise_error(Mas::Cms::Repository::Base::RequestError)
       end
     end
   end

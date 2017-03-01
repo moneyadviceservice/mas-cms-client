@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Repository::Customers::Cream do
     describe '#find' do
       context 'when customer exists' do

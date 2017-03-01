@@ -1,4 +1,4 @@
-module Core
+module Mas::Cms
   RSpec.describe Article, type: :model do
     subject { described_class.new(double, attributes) }
 
@@ -281,7 +281,7 @@ module Core
 
     describe '#alternates' do
       it 'returns an array of alternates' do
-        expect(subject.alternates.first).to be_an_instance_of(Core::Article::Alternate)
+        expect(subject.alternates.first).to be_an_instance_of(Mas::Cms::Article::Alternate)
       end
     end
 
