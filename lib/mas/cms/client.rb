@@ -1,16 +1,16 @@
 require 'mas/cms/client/version'
 require 'faraday'
+require 'active_model'
+require 'ostruct'
 
 module Mas
   module Cms
     module Connection
       autoload :Http, 'mas/cms/core/connection/http'
-      autoload :Smtp, 'mas/cms/core/connection/smtp'
     end
 
     module ConnectionFactory
       autoload :Http, 'mas/cms/core/connection_factory/http'
-      autoload :Smtp, 'mas/cms/core/connection_factory/smtp'
     end
 
     autoload :ActionPlan, 'mas/cms/core/entity/action_plan'
