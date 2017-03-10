@@ -1,10 +1,21 @@
 require 'mas/cms/client/version'
+require 'mas/cms/config'
 require 'faraday'
 require 'active_model'
 require 'ostruct'
 
 module Mas
   module Cms
+    module Client
+      def self.config
+        @@config ||= ::Mas::Cms::Config.new
+
+        yield @@config if block_given?
+
+        @@config
+      end
+    end
+
     module Connection
       autoload :Http, 'mas/cms/core/connection/http'
     end
