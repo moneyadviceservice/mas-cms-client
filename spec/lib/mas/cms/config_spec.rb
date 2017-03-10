@@ -15,4 +15,14 @@ RSpec.describe Mas::Cms::Config do
   it 'responds to `host`' do
     expect(config.host).to eq host
   end
+
+  context 'validation' do
+    context 'timeout' do
+      let(:timeout) { 'banana :)' }
+      it 'must resolve to a integer greater than 0' do
+        expect(config).to be_invalid
+      end
+    end
+
+  end
 end
