@@ -1,4 +1,5 @@
 require 'mas/cms/client/version'
+require 'mas/cms/client'
 require 'faraday'
 require 'faraday_middleware'
 require 'active_model'
