@@ -153,7 +153,7 @@ module Mas::Cms
       let(:per_page) { 10 }
 
       describe '#data' do
-        let(:repository) { instance_double(Repository::Search::GoogleCustomSearchEngine) }
+        let(:repository) { double }
         let(:data) { double }
 
         before do

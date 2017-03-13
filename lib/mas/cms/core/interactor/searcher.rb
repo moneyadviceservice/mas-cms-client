@@ -22,7 +22,8 @@ module Mas::Cms
           if new_result.valid?
             results_collection << new_result
           else
-            Rails.logger.info("Invalid search result: #{new_result.inspect}")
+            # FIXME: something like `Mas::Cms::Client.config.logger` should be used here
+            # Rails.logger.info("Invalid search result: #{new_result.inspect}")
           end
         end
       end
