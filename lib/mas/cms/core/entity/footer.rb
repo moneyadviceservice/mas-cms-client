@@ -6,10 +6,6 @@ module Mas::Cms
       @contact ||= Mas::Cms::Contact.new(contact_options)
     end
 
-    def web_chat
-      @web_chat ||= Mas::Cms::WebChat.new(web_chat_options)
-    end
-
     # BaseContentReader attempts to 'build categories', our entity
     # doesn't need them so lets stub out the behaviour to keep it happy.
     def categories
@@ -35,16 +31,6 @@ module Mas::Cms
         additional_two: find_block_value('raw_contact_additional_two'),
         additional_three: find_block_value('raw_contact_additional_three'),
         small_print: find_block_value('raw_contact_small_print')
-      }
-    end
-
-    def web_chat_options
-      {
-        heading: find_block_value('raw_web_chat_heading'),
-        additional_one: find_block_value('raw_web_chat_additional_one'),
-        additional_two: find_block_value('raw_web_chat_additional_two'),
-        additional_three: find_block_value('raw_web_chat_additional_three'),
-        small_print: find_block_value('raw_web_chat_small_print')
       }
     end
   end
