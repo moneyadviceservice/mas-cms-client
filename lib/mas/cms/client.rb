@@ -1,7 +1,9 @@
 require 'mas/cms/client/version'
 require 'faraday'
+require 'faraday_middleware'
 require 'active_model'
 require 'ostruct'
+require 'active_support/core_ext'
 
 module Mas
   module Cms
