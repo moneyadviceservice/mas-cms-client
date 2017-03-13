@@ -4,7 +4,7 @@ $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mas/cms/client/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = "mas-cms-client"
+  spec.name          = 'mas-cms-client'
   spec.version       = Mas::Cms::Client::VERSION
   spec.authors       = ['Money Advice Service']
   spec.email         = ['development.team@moneyadviceservice.org.uk']
@@ -22,17 +22,16 @@ Gem::Specification.new do |spec|
   end
 
   spec.files         = `git ls-files -z`.split("\x0").reject { |f| f.match(%r{^(test|spec|features)/}) }
-  spec.bindir        = "exe"
+  spec.bindir        = 'exe'
   spec.executables   = spec.files.grep(%r{^exe/}) { |f| File.basename(f) }
-  spec.require_paths = ["lib"]
+  spec.require_paths = ['lib']
 
   spec.add_dependency 'activemodel', '>= 4.0', '< 5.0'
   spec.add_development_dependency 'faraday', '~> 0.9.2'
   spec.add_development_dependency 'faraday-conductivity', '~> 0.3.1'
   spec.add_development_dependency 'faraday_middleware', '~> 0.10.0'
-  spec.add_development_dependency 'activemodel', '~> 4.2.7'
 
-  spec.add_development_dependency "bundler", "~> 1.11"
-  spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "rspec", "~> 3.0"
+  spec.add_development_dependency 'bundler', '~> 1.11'
+  spec.add_development_dependency 'rake', '~> 10.0'
+  spec.add_development_dependency 'rspec', '~> 3.0'
 end
