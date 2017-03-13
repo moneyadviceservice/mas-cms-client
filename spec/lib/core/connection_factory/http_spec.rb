@@ -21,20 +21,12 @@ RSpec.describe Mas::Cms::ConnectionFactory::Http, '.build' do
     expect(factory.builder.handlers).to include(Faraday::Request::Retry)
   end
 
-  it "defaults to including an `X-Request-Id' request header" do
-    expect(factory.builder.handlers).to include(Faraday::Request::RequestId)
-  end
-
   it 'defaults to parsing JSON responses' do
     expect(factory.builder.handlers).to include(FaradayMiddleware::ParseJson)
   end
 
   it 'defaults to raising an error on failed responses' do
     expect(factory.builder.handlers).to include(Faraday::Response::RaiseError)
-  end
-
-  it 'defaults to parsing link headers' do
-    expect(factory.builder.handlers).to include(Faraday::Response::LinkHeader)
   end
 
   it 'includes instrumentation' do

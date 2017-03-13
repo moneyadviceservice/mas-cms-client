@@ -47,8 +47,8 @@ module Mas::Cms
                      type.classify
                    end
 
-      if Core.const_defined? klass_name
-        Core.const_get(klass_name)
+      if Mas::Cms.const_defined? klass_name
+        Mas::Cms.const_get(klass_name)
       else
         Other
       end

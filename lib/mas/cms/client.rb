@@ -1,7 +1,10 @@
 require 'mas/cms/client/version'
 require 'faraday'
+require 'faraday_middleware'
 require 'active_model'
 require 'ostruct'
+require 'active_support/core_ext'
+require 'tree'
 
 module Mas
   module Cms
@@ -137,6 +140,8 @@ module Mas
       module CMS
         autoload :AttributeBuilder, 'mas/cms/core/repository/cms/attribute_builder'
         autoload :CMS, 'mas/cms/core/repository/cms/cms'
+        autoload :Resource301Error, 'mas/cms/core/repository/cms/cms'
+        autoload :Resource302Error, 'mas/cms/core/repository/cms/cms'
         autoload :CmsApi, 'mas/cms/core/repository/cms/cms_api'
         autoload :BlockComposer, 'mas/cms/core/repository/cms/block_composer'
         autoload :PageFeedback, 'mas/cms/core/repository/cms/page_feedback'
