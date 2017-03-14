@@ -24,10 +24,6 @@ module Mas::Cms::Repository::CMS
       end.new
     end
 
-    before do
-      Mas::Cms::Registry::Connection[:cms] = Mas::Cms::ConnectionFactory::Http.build(config[:cms_url], retries: 0)
-    end
-
     describe '#find' do
       context 'when article does not exist' do
         it 'returns nil' do

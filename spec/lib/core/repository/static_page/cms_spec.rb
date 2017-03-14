@@ -25,21 +25,6 @@ module Mas::Cms::Repository::StaticPages
           expect(repository.find(id)).to be_a(Hash)
           expect(repository.find(id)['id']).to eq(id)
         end
-
-        context 'and an alternates links header is returned' do
-          let(:alternate_links) do
-            [
-              '<https://example.com/cy/path/to/cy/alternate>; rel="alternate"; hreflang="cy"; title="alternate"',
-              '<https://example.com/path/to/en/alternate>; rel="alternate"; hreflang="en"; title="alternate"'
-            ]
-          end
-          let(:headers) { { 'Link' => alternate_links } }
-
-          it 'returns an array of attributes' do
-            expect(repository.find(id)['alternates']).to be_a(Array)
-            expect(repository.find(id)['alternates'].size).to eq(alternate_links.size)
-          end
-        end
       end
 
       context 'when the type is non-existent' do
