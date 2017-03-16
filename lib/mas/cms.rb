@@ -1,3 +1,4 @@
+require 'mas/cms/resource'
 require 'mas/cms/client/version'
 require 'mas/cms/client'
 require 'faraday'
@@ -16,6 +17,9 @@ module Mas
     module ConnectionFactory
       autoload :Http, 'mas/cms/connection_factory/http'
     end
+
+    # API Resources
+    autoload :Page, 'mas/cms/page'
 
     autoload :ActionPlan, 'mas/cms/entity/action_plan'
     autoload :Article, 'mas/cms/entity/article'

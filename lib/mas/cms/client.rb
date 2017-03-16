@@ -10,6 +10,10 @@ module Mas
 
         @@config
       end
+
+      def self.connection
+        @@conn ||= Mas::Cms::ConnectionFactory::Http.build(config.host)
+      end
     end
   end
 end

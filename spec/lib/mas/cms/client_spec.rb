@@ -16,7 +16,7 @@ RSpec.describe Mas::Cms::Client do
 
     it 'excepts block to setup config' do
       client.config do |c|
-        expect(c).to be_a(Mas::Cms::Config)
+        expect(c).to be_instance_of(Mas::Cms::Config)
       end
     end
 
@@ -26,6 +26,13 @@ RSpec.describe Mas::Cms::Client do
 
     it 'returns host config' do
       expect(config.host).to eq host
+    end
+  end
+
+  describe '.connection' do
+    subject(:connection) { Mas::Cms::Client.connection }
+    it 'returns a http connection obj' do
+      expect(connection).to be_instance_of(Mas::Cms::Connection::Http)
     end
   end
 end
