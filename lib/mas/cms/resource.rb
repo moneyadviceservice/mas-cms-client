@@ -9,14 +9,30 @@ module Mas
         def find(slug:, locale: 'en')
           new(
             slug,
-            http.get(resource_url(slug: slug, locale: locale))
+            http.get(path(slug: slug, locale: locale))
           )
+        end
+
+        def all(locale: 'en')
+          http.get(path(slug: nil, locale: locale)).map do |entity_attrs|
+            new(
+              entity_attrs.delete(:id),
+              entity_attrs
+            )
+          end
         end
 
         private
 
-        def resource_url(slug:, locale:)
-          "/api/#{locale}/#{type}/#{slug}.json".downcase
+        def path(slug:, locale:)
+          [
+           '/api',
+           locale,
+           type,
+           slug
+          ].compact
+           .join('/')
+           .downcase + '.json'
         end
 
         def type

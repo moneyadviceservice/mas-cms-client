@@ -7,41 +7,102 @@ RSpec.describe Mas::Cms::Resource do
     end
   end
 
-  let(:conn) { double(:http_connection, get: data_attributes) }
-  let(:data_attributes) do
-    {
-      title:   'entity title',
-      content: 'entity content'
-    }
-  end
+  let(:conn) { spy(:http_connection, get: data_attributes) }
 
   before do
     allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
   end
 
   describe '#find' do
-    let(:find_args) do
+    let(:data_attributes) do
+      {
+        title:   'entity title',
+        content: 'entity content'
+      }
+    end
+    
+    let(:args) do
       {
         locale: 'en',
         slug: 'how-to-stay-alive'
       }
     end
+    let(:entity) { entity_class.find(args) }
 
-    context 'successful API call to CMS' do
-      let(:entity) { entity_class.find(find_args) }
-
+    context 'when API call successful' do
       it 'returns an instance of entity' do
         expect(entity).to be_instance_of(A)
       end
 
+      it 'query correct cms resource' do
+        entity
+        expect(conn).to have_received(:get).with('/api/en/a/how-to-stay-alive.json')
+      end
+
       it 'returns requested entity' do
-        expect(entity.id).to eq(find_args[:slug])
+        expect(entity.id).to eq(args[:slug])
       end
 
       it 'returns a fully instanciated entity instance' do
         expect(entity.title).to eq(data_attributes[:title])
         expect(entity.content).to eq(data_attributes[:content])
       end
+
+      context 'locale params defaults to `en`' do
+        let(:args) { {slug: 'no-way'} }
+
+        it 'returns an instance of entity' do
+          expect(entity).to be_instance_of(A)
+        end
+      end
     end
+  end
+
+  describe '#all' do
+    let(:data_attributes) do
+      [
+        {
+          id:  'my-first-entity',
+          title:   'entity title',
+          content: 'entity content'
+        },
+        {
+          id:  'my-second-entity',
+          title:   'foo title',
+          content: 'bar content'
+        }
+      ]
+    end
+    
+    let(:args) do
+      {
+        locale: 'en',
+      }
+    end
+    let(:entities) { entity_class.all(args) }
+
+    context 'when API call successful' do
+      it 'returns an array of entity' do
+        expect(entities).to all(be_an(A))
+      end
+
+      it 'returns a fully instanciated entities instance' do
+        expect(entities[1].title).to eq(data_attributes[1][:title])
+        expect(entities[1].content).to eq(data_attributes[1][:content])
+      end
+
+      it 'query correct cms resource' do
+        entities
+        expect(conn).to have_received(:get).with('/api/en/a.json')
+      end
+
+      context 'locale params defaults to `en`' do
+        let(:args) { {} }
+
+        it 'returns an array of entity' do
+          expect(entities).to all(be_an(A))
+        end
+      end
+    end    
   end
 end
