@@ -8,15 +8,15 @@ require 'factory_girl'
 require 'faker'
 require 'vcr'
 
-def config
-  {
-    timeout:   ( ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10' ),
-    api_token: ( ENV['MAS_CMS_API_TOKEN'] ||= 'mytoken' ),
-    cms_url:   ( ENV['MAS_CMS_URL'] ||= 'http://localhost:3000' )
-  }
+Mas::Cms::Client.config do |c|
+  c.timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10'),
+  c.open_timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10'),
+  c.api_token =  (ENV['MAS_CMS_API_TOKEN'] ||= 'mytoken'),
+  c.host =  (ENV['MAS_CMS_URL'] ||= 'http://localhost:3000')
+  c.retries = 1
 end
 
-puts "Test are running with this config: #{config.inspect}"
+puts "Test are running with this config: #{Mas::Cms::Client.config}"
 
 FactoryGirl.find_definitions
 
@@ -26,7 +26,7 @@ RSpec.configure do |c|
   c.include(Shoulda::Matchers::ActiveModel, type: :model)
   c.include FactoryGirl::Syntax::Methods
   c.before(:suite) do
-    Mas::Cms::Registry::Connection[:cms] = Mas::Cms::ConnectionFactory::Http.build(config[:cms_url], retries: 0)
+    Mas::Cms::Registry::Connection[:cms] = Mas::Cms::ConnectionFactory::Http.build(Mas::Cms::Client.config.host, retries: 0)
     Mas::Cms::Registry::Repository[:page_feedback] = Mas::Cms::Repository::CMS::PageFeedback.new
     Mas::Cms::Registry::Repository[:footer] = Mas::Cms::Repository::Cache.new(Mas::Cms::Repository::Footer::CMS.new, {})
   end

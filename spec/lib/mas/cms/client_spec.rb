@@ -14,7 +14,7 @@ RSpec.describe Mas::Cms::Client do
       end
     end
 
-    it 'excepts block to setup config' do
+    it 'expects block to setup config' do
       client.config do |c|
         expect(c).to be_instance_of(Mas::Cms::Config)
       end

@@ -20,7 +20,7 @@ RSpec.describe Mas::Cms::Resource do
         content: 'entity content'
       }
     end
-    
+
     let(:args) do
       {
         locale: 'en',
@@ -73,7 +73,7 @@ RSpec.describe Mas::Cms::Resource do
         }
       ]
     end
-    
+
     let(:args) do
       {
         locale: 'en',
@@ -86,7 +86,7 @@ RSpec.describe Mas::Cms::Resource do
         expect(entities).to all(be_an(A))
       end
 
-      it 'returns a fully instanciated entities instance' do
+      it 'returns a fully instantiated entities instance' do
         expect(entities[1].title).to eq(data_attributes[1][:title])
         expect(entities[1].content).to eq(data_attributes[1][:content])
       end
@@ -103,6 +103,6 @@ RSpec.describe Mas::Cms::Resource do
           expect(entities).to all(be_an(A))
         end
       end
-    end    
+    end
   end
 end

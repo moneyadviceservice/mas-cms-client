@@ -1,3 +1,4 @@
+require 'mas/cms/connection'
 require 'mas/cms/resource'
 require 'mas/cms/client/version'
 require 'mas/cms/client'
@@ -10,10 +11,6 @@ require 'tree'
 
 module Mas
   module Cms
-    module Connection
-      autoload :Http, 'mas/cms/connection/http'
-    end
-
     module ConnectionFactory
       autoload :Http, 'mas/cms/connection_factory/http'
     end
