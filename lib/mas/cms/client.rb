@@ -12,7 +12,7 @@ module Mas
       end
 
       def self.connection
-        @@conn ||= Mas::Cms::ConnectionFactory::Http.build(config.host)
+        @@conn ||= Mas::Cms::Connection.new
       end
     end
   end

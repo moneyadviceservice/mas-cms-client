@@ -31,8 +31,9 @@ RSpec.describe Mas::Cms::Client do
 
   describe '.connection' do
     subject(:connection) { Mas::Cms::Client.connection }
+
     it 'returns a http connection obj' do
-      expect(connection).to be_instance_of(Mas::Cms::Connection::Http)
+      expect(connection).to be_instance_of(Mas::Cms::Connection)
     end
   end
 end

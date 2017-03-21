@@ -7,14 +7,14 @@ module Mas
 
       module ClassMethods
         def find(slug:, locale: 'en')
-          new(
-            slug,
-            http.get(path(slug: slug, locale: locale))
-          )
+          attributes = process_response(http.get(path(slug: slug, locale: locale)))
+
+          new(slug, attributes)
         end
 
         def all(locale: 'en')
-          http.get(path(slug: nil, locale: locale)).map do |entity_attrs|
+          response_body = http.get(path(slug: nil, locale: locale)).body
+          response_body.map do |entity_attrs|
             new(
               entity_attrs.delete(:id),
               entity_attrs
@@ -23,6 +23,10 @@ module Mas
         end
 
         private
+
+        def process_response(response)
+          Mas::Cms::Repository::CMS::AttributeBuilder.build(response)
+        end
 
         def path(slug:, locale:)
           [

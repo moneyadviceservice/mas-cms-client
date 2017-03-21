@@ -52,7 +52,7 @@ module Mas::Cms::Repository
       end
 
       def translate_attributes_from_raw_blocks(attributes)
-        attributes['blocks'].select {|h| h['identifier'].start_with?('raw_') }.each do |h|
+        Array(attributes['blocks']).select {|h| h['identifier'].start_with?('raw_') }.each do |h|
           key = h['identifier'].gsub(/^raw_/, '')
           attributes[key] = h['content']
         end

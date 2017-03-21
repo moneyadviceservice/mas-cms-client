@@ -5,9 +5,25 @@ RSpec.describe Mas::Cms::Resource do
 
       include Mas::Cms::Resource
     end
+    A
   end
 
-  let(:conn) { spy(:http_connection, get: data_attributes) }
+  let(:specific_entity_class) do
+    class B < Mas::Cms::Entity
+      attr_accessor :call_to_action, :body_content
+      include Mas::Cms::Resource
+
+      def process_response(response)
+        {
+          call_to_action: response.body[:title],
+          body_content: response.body[:content]
+        }
+      end
+    end
+    B
+  end
+
+  let(:conn) { spy(:http_connection, get: double(body: data_attributes)) }
 
   before do
     allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
@@ -54,6 +70,15 @@ RSpec.describe Mas::Cms::Resource do
         it 'returns an instance of entity' do
           expect(entity).to be_instance_of(A)
         end
+      end
+    end
+
+    context 'when specific entity class' do
+      let(:entity) { specific_entity_class.find(args) }
+
+      it 'overwrites original parser' do
+        expect(entity.call_to_action).to eq(data_attributes[:title])
+        expect(entity.body_content).to eq(data_attributes[:content])
       end
     end
   end
