@@ -13,7 +13,7 @@ RSpec.describe Mas::Cms::Resource do
       attr_accessor :call_to_action, :body_content
       include Mas::Cms::Resource
 
-      def process_response(response)
+      def self.process_response(response)
         {
           call_to_action: response.body[:title],
           body_content: response.body[:content]

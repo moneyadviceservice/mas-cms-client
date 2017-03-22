@@ -8,7 +8,6 @@ module Mas
       module ClassMethods
         def find(slug:, locale: 'en')
           attributes = process_response(http.get(path(slug: slug, locale: locale)))
-
           new(slug, attributes)
         end
 
@@ -25,7 +24,7 @@ module Mas
         private
 
         def process_response(response)
-          Mas::Cms::Repository::CMS::AttributeBuilder.build(response)
+          response.body
         end
 
         def path(slug:, locale:)
