@@ -8,7 +8,7 @@ http_interactions:
       string: '{"locale":"en","article_id":"a-guide-to-lifetime-isas"}'
     headers:
       User-Agent:
-      - Mas-Responsive/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
+      - Mas-Cms-Client/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
         (319; x86_64-darwin15)
       Authorization:
       - Token token="mytoken"

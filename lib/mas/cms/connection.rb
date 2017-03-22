@@ -1,4 +1,6 @@
 require 'faraday'
+require 'faraday_middleware'
+require 'faraday/conductivity'
 
 module Mas
   module Cms

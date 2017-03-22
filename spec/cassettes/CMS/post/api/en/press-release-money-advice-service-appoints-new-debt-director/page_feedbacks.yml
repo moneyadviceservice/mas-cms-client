@@ -8,7 +8,7 @@ http_interactions:
       string: '{"liked":true,"article_id":"press-release-money-advice-service-appoints-new-debt-director","session_id":"ae2fcba004e16dffa54f91a46d274238","locale":"en","slug":"press-release-money-advice-service-appoints-new-debt-director"}'
     headers:
       User-Agent:
-      - Mas-Responsive/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
+      - Mas-Cms-Client/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
         (319; x86_64-darwin15)
       Authorization:
       - Token token="mytoken"

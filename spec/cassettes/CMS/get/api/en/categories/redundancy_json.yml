@@ -8,7 +8,7 @@ http_interactions:
       string: ''
     headers:
       User-Agent:
-      - Mas-Responsive/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
+      - Mas-Cms-Client/1.0 (Jon-Gilbraith-00224.local; jongilbraith; 80584) ruby/2.2.5
         (319; x86_64-darwin15)
       X-Request-Id:
       - 133396dc-54f0-44d5-9453-75b6cb821a35
