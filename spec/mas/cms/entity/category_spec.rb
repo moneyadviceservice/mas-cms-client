@@ -21,6 +21,10 @@ module Mas::Cms
     specify { expect(subject).to_not be_home }
     specify { expect(subject).to_not be_news }
 
+    it 'includes Mas::Cms::Resource' do
+      expect(described_class.included_modules).to include(Mas::Cms::Resource)
+    end
+
     describe "category hierarchy" do
       let(:category_with_nil_contents) { build :category, contents: nil }
       let(:child_category) { build :category, contents: [build(:article), build(:action_plan)] }
