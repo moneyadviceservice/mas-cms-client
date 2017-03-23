@@ -4,6 +4,46 @@ module Mas::Cms
     attr_accessor :type, :parent_id, :title, :description, :contents, :third_level_navigation, :images, :links, :category_promos, :legacy_contents, :legacy
     validates_presence_of :title
 
+    class << self
+      def process_response(response)
+        body = response.body.dup
+        body[:contents] = build_contents(body[:contents])
+        body[:legacy_contents] = build_contents(body[:legacy_contents])
+        body
+      end
+
+      private
+      def build_contents(contents)
+        return [] unless contents.present?
+
+        contents.map do |item|
+          klass = klass_for(item['type'])
+          if klass == Category
+            find(item['id'])
+          else
+            klass.new(item['id'], item)
+          end
+        end
+      end
+
+      def klass_for(type)
+        klass_name = case type
+                     when 'guide'
+                       'Article'
+                     when nil
+                       'Category'
+                     else
+                       type.classify
+                     end
+
+        if Mas::Cms.const_defined? klass_name
+          Mas::Cms.const_get(klass_name)
+        else
+          Other
+        end
+      end
+    end
+
     def categories
       contents.delete_if { |c| c.type != 'category' }
     end
