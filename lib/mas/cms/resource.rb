@@ -1,3 +1,5 @@
+require 'active_support/inflector'
+
 module Mas
   module Cms
     module Resource
@@ -6,6 +8,14 @@ module Mas
       end
 
       module ClassMethods
+        def resource_type(rtype)
+          @resource_type = rtype
+        end
+
+        def resource_name
+          (@resource_type || self.name.demodulize.underscore.pluralize).to_s
+        end
+
         def find(slug:, locale: 'en')
           attributes = process_response(http.get(path(slug: slug, locale: locale)))
           new(slug, attributes)
@@ -31,15 +41,11 @@ module Mas
           [
            '/api',
            locale,
-           type,
+           resource_name,
            slug
           ].compact
            .join('/')
            .downcase + '.json'
-        end
-
-        def type
-          self.name
         end
 
         def http

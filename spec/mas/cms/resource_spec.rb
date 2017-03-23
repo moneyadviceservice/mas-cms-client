@@ -2,14 +2,14 @@ RSpec.describe Mas::Cms::Resource do
   subject(:entity_class) do
     class A < Mas::Cms::Entity
       attr_accessor :title, :content
-
       include Mas::Cms::Resource
+      resource_type :poker_card
     end
     A
   end
 
   let(:specific_entity_class) do
-    class B < Mas::Cms::Entity
+    class BarFoo < Mas::Cms::Entity
       attr_accessor :call_to_action, :body_content
       include Mas::Cms::Resource
 
@@ -20,16 +20,47 @@ RSpec.describe Mas::Cms::Resource do
         }
       end
     end
-    B
+    BarFoo
   end
 
+  let(:modularized_entity) do
+    module ModularizedEntity
+      module Foo
+        class Bar < ::Mas::Cms::Entity
+          include Mas::Cms::Resource
+        end
+      end
+    end
+  end
+
+  let(:data_attributes) { {} }
   let(:conn) { spy(:http_connection, get: double(body: data_attributes)) }
 
   before do
     allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
   end
 
-  describe '#find' do
+  describe '.resource_name' do
+    context 'when resource_type is defined' do
+      it 'is not pluralized' do
+        expect(entity_class.resource_name).to eq('poker_card')
+      end
+    end
+
+    context 'when resource_type is not defined' do
+      it 'is pluralized' do
+        expect(specific_entity_class.resource_name).to eq('bar_foos')
+      end
+    end
+
+    context 'when resource class is under a module' do
+      it 'returns pluralized name without the module' do
+        expect(modularized_entity.resource_name).to eq('bars')
+      end
+    end
+  end
+
+  describe '.find' do
     let(:data_attributes) do
       {
         title:   'entity title',
@@ -52,7 +83,7 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entity
-        expect(conn).to have_received(:get).with('/api/en/a/how-to-stay-alive.json')
+        expect(conn).to have_received(:get).with('/api/en/poker_card/how-to-stay-alive.json')
       end
 
       it 'returns requested entity' do
@@ -83,7 +114,7 @@ RSpec.describe Mas::Cms::Resource do
     end
   end
 
-  describe '#all' do
+  describe '.all' do
     let(:data_attributes) do
       [
         {
@@ -118,7 +149,7 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entities
-        expect(conn).to have_received(:get).with('/api/en/a.json')
+        expect(conn).to have_received(:get).with('/api/en/poker_card.json')
       end
 
       context 'locale params defaults to `en`' do
