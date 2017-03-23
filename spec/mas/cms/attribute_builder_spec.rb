@@ -17,7 +17,9 @@ module Mas::Cms::Repository::CMS
       end
 
       it 'returns categories' do
-        expected = ["managing-money", "taking-control-of-debt"]
+        expected = ["managing-money", "taking-control-of-debt"].map do |category_name|
+          Mas::Cms::Category.new(category_name, {})
+        end
         expect(subject['categories']).to eq(expected)
       end
 
