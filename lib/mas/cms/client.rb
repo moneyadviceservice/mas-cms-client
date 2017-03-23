@@ -4,15 +4,15 @@ module Mas
   module Cms
     module Client
       def self.config
-        @@config ||= ::Mas::Cms::Config.new
+        @config ||= ::Mas::Cms::Config.new
 
-        yield @@config if block_given?
+        yield @config if block_given?
 
-        @@config
+        @config
       end
 
       def self.connection
-        @@conn ||= Mas::Cms::Connection.new
+        @conn ||= Mas::Cms::Connection.new
       end
     end
   end

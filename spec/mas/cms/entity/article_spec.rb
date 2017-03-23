@@ -1,5 +1,6 @@
 module Mas::Cms
   RSpec.describe Article, type: :model do
+    it_has_behavior 'a cms page entity'
     subject { described_class.new(double, attributes) }
 
     let(:categories) { [] }

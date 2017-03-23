@@ -1,5 +1,5 @@
 module Mas::Cms
-  class Article < Entity
+  class Article < Page
     Alternate = Struct.new(:title, :url, :hreflang)
 
     attr_accessor :type, :slug, :identifier, :title, :description, :body, :categories, :related_content, :supports_amp

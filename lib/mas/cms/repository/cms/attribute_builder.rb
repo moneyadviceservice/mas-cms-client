@@ -1,3 +1,5 @@
+require 'mas/cms/repository/cms/block_composer'
+
 module Mas::Cms::Repository
   module CMS
     class AttributeBuilder
