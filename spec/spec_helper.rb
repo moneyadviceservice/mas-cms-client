@@ -1,6 +1,5 @@
 $LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
 require 'mas/cms'
-require 'registry'
 
 require 'webmock/rspec'
 require 'shoulda-matchers'
@@ -25,11 +24,6 @@ RSpec.configure do |c|
                                    'exhibits behaviour of an'
   c.include(Shoulda::Matchers::ActiveModel, type: :model)
   c.include FactoryGirl::Syntax::Methods
-  c.before(:suite) do
-    Mas::Cms::Registry::Connection[:cms] = Mas::Cms::Client.connection.raw_connection
-    Mas::Cms::Registry::Repository[:page_feedback] = Mas::Cms::Repository::CMS::PageFeedback.new
-    Mas::Cms::Registry::Repository[:footer] = Mas::Cms::Repository::Cache.new(Mas::Cms::Repository::Footer::CMS.new, {})
-  end
 end
 
 VCR.configure do |c|

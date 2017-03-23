@@ -4,8 +4,8 @@ RSpec.shared_examples_for 'a cms page entity' do
   end
 
   describe '.find' do
-    let(:response) { double }
-    let(:conn) { spy(:http_connection, get: double(body: {})) }
+    let(:response) { double(body: {}) }
+    let(:conn) { spy(:http_connection, get: response) }
 
     before do
       allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
