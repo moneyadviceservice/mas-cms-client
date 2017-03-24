@@ -17,7 +17,7 @@ module Mas::Cms
         return [] unless contents.present?
 
         contents.map do |item|
-          klass = klass_for(item['type'])
+          klass = content_item_type_to_entity_class.fetch(item['type'], Other)
           if klass == Category
             find(item['id'])
           else
@@ -26,21 +26,19 @@ module Mas::Cms
         end
       end
 
-      def klass_for(type)
-        klass_name = case type
-                     when 'guide'
-                       'Article'
-                     when nil
-                       'Category'
-                     else
-                       type.classify
-                     end
-
-        if Mas::Cms.const_defined? klass_name
-          Mas::Cms.const_get(klass_name)
-        else
-          Other
-        end
+      def content_item_type_to_entity_class
+        {
+          nil           => Category,
+          'guide'       => Article,
+          'action_plan' => ActionPlan,
+          'article'     => Article,
+          'corporate'   => CorporateArticle,
+          'footer'      => Footer,
+          'home_page'   => HomePage,
+          'news'        => NewsArticle,
+          'tool'        => Other,
+          'video'       => Video
+        }
       end
     end
 
