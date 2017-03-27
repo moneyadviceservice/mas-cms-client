@@ -69,7 +69,10 @@ RSpec.describe Mas::Cms::Resource do
     end
     let(:slug) { 'how-to-stay-alive' }
     let(:find_options) do
-      { locale: 'en' }
+      {
+        locale: 'en',
+        cached: false
+      }
     end
     let(:entity) { entity_class.find(slug, find_options) }
 
@@ -80,7 +83,7 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entity
-        expect(conn).to have_received(:get).with('/api/en/poker_card/how-to-stay-alive.json')
+        expect(conn).to have_received(:get).with('/api/en/poker_card/how-to-stay-alive.json', cached: find_options[:cached])
       end
 
       it 'returns requested entity' do

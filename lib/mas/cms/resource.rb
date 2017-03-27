@@ -16,8 +16,13 @@ module Mas
           (@resource_type || self.name.demodulize.underscore.pluralize).to_s
         end
 
-        def find(slug, locale: 'en')
-          attributes = process_response(http.get(path(slug: slug, locale: locale)))
+        def find(slug, locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
+          attributes = process_response(
+            http.get(
+              path(slug: slug, locale: locale),
+              cached: cached
+            )
+          )
           new(slug, attributes)
         end
 
