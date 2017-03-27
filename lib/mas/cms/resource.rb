@@ -21,7 +21,9 @@ module Mas
             http.get(
               path(slug: slug, locale: locale),
               cached: cached
-            )
+            ),
+            locale: locale,
+            cached: cached
           )
           new(slug, attributes)
         end
@@ -38,7 +40,7 @@ module Mas
 
         private
 
-        def process_response(response)
+        def process_response(response, options={})
           response.body
         end
 

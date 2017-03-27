@@ -8,9 +8,9 @@ require 'faker'
 require 'vcr'
 
 Mas::Cms::Client.config do |c|
-  c.timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10'),
-  c.open_timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10'),
-  c.api_token =  (ENV['MAS_CMS_API_TOKEN'] ||= 'mytoken'),
+  c.timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
+  c.open_timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
+  c.api_token =  (ENV['MAS_CMS_API_TOKEN'] ||= 'mytoken')
   c.host =  (ENV['MAS_CMS_URL'] ||= 'http://localhost:3000')
   c.retries = 1
 end

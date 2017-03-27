@@ -5,21 +5,21 @@ module Mas::Cms
     validates_presence_of :title
 
     class << self
-      def process_response(response)
+      def process_response(response, options={})
         body = response.body.dup
-        body[:contents] = build_contents(body[:contents])
-        body[:legacy_contents] = build_contents(body[:legacy_contents])
+        body[:contents] = build_contents(body[:contents], options)
+        body[:legacy_contents] = build_contents(body[:legacy_contents], options)
         body
       end
 
       private
-      def build_contents(contents)
+      def build_contents(contents, options)
         return [] unless contents.present?
 
         contents.map do |item|
           klass = content_item_type_to_entity_class.fetch(item['type'], Other)
           if klass == Category
-            find(item['id'])
+            find(item['id'], options)
           else
             klass.new(item['id'], item)
           end

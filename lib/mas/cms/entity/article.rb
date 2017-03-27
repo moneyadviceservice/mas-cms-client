@@ -14,7 +14,7 @@ module Mas::Cms
     end
 
     def only_child?
-      categories.compact.one?
+      @categories.compact.one?
     end
 
     def latest_blog_post_links

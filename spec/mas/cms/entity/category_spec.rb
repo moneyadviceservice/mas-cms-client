@@ -25,6 +25,27 @@ module Mas::Cms
       expect(described_class.included_modules).to include(Mas::Cms::Resource)
     end
 
+    describe '.process_response' do
+      context 'when type is category' do
+        let(:response) do
+          double(body: ActiveSupport::HashWithIndifferentAccess.new(response_body))
+        end
+
+        let(:response_body) do
+          {
+            contents: [
+              { type: nil, id: 'making-will' }
+            ]
+          }
+        end
+
+        it 'calls find on Category resource with locales' do
+          expect(Category).to receive(:find).with('making-will', locale: 'cy', cached: true)
+          Category.process_response(response, locale: 'cy', cached: true)
+        end
+      end
+    end
+
     describe "category hierarchy" do
       let(:category_with_nil_contents) { build :category, contents: nil }
       let(:child_category) { build :category, contents: [build(:article), build(:action_plan)] }
@@ -42,14 +63,14 @@ module Mas::Cms
       specify { expect(category_with_legacy_contents.legacy?).to be true }
     end
 
-    describe "#categories" do
+    describe '#categories' do
       let(:category) { double(type: 'category') }
       let(:another_category) { double(type: 'category') }
       let(:article) { double(type: 'article') }
 
       before { attributes[:contents] = [category, article, another_category] }
 
-      it 'only returns the catgories' do
+      it 'only returns the categories' do
         expect(subject.categories).to eq [category, another_category]
       end
     end

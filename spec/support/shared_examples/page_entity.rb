@@ -13,7 +13,8 @@ RSpec.shared_examples_for 'a cms page entity' do
     end
 
     it 'uses Attribute Builder to process response' do
-      expect(Mas::Cms::Repository::CMS::AttributeBuilder).to receive(:build).with(response)
+      expect(Mas::Cms::Repository::CMS::AttributeBuilder).to receive(:build)
+        .with(response, locale: 'en', cached: nil)
       described_class.find(slug)
     end
   end

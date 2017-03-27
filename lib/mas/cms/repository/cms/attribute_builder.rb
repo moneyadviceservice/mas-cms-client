@@ -3,14 +3,15 @@ require 'mas/cms/repository/cms/block_composer'
 module Mas::Cms::Repository
   module CMS
     class AttributeBuilder
-      attr_reader :response
+      attr_reader :response, :options
 
-      def initialize(response)
+      def initialize(response, options={})
         @response = response
+        @options = options
       end
 
-      def self.build(response)
-        new(response).attributes
+      def self.build(response, options)
+        new(response, options).attributes
       end
 
       def attributes
@@ -45,7 +46,7 @@ module Mas::Cms::Repository
 
       def set_categories(attributes)
         attributes['categories'] = Array(attributes['category_names']).map do |category_name|
-          Mas::Cms::Category.find(category_name)
+          Mas::Cms::Category.find(category_name, options)
         end
       end
 

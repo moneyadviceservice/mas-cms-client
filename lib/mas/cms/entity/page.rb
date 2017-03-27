@@ -5,8 +5,8 @@ module Mas
     class Page < Entity
       include Mas::Cms::Resource
 
-      def self.process_response(response)
-        Mas::Cms::Repository::CMS::AttributeBuilder.build(response)
+      def self.process_response(response, options={})
+        Mas::Cms::Repository::CMS::AttributeBuilder.build(response, options)
       end
     end
   end

@@ -4,9 +4,16 @@ module Mas::Cms::Repository::CMS
   RSpec.describe AttributeBuilder do
     let(:body) { File.read('spec/fixtures/cms/beginners-guide-to-managing-your-money.json') }
     let(:response) { OpenStruct.new(body: JSON.parse(body)) }
+    let(:options) { { locale: 'en' } }
 
     describe '.build' do
-      subject { AttributeBuilder.build(response) }
+      subject { AttributeBuilder.build(response, options) }
+
+      it 'instantiate an attribute builder passing response and options' do
+        attribute_builder = double(attributes: {})
+        expect(AttributeBuilder).to receive(:new).with(response, options).and_return(attribute_builder)
+        subject
+      end
 
       it 'returns title' do
         expect(subject['title']).to eq('Beginner’s guide to managing your money')
@@ -46,27 +53,39 @@ module Mas::Cms::Repository::CMS
       end
 
       it 'returns previous links' do
-        expect(AttributeBuilder.build(response)['related_content']['previous_link']).to_not be_present
+        expect(subject['related_content']['previous_link']).to_not be_present
       end
 
       it 'returns next links' do
-        expect(AttributeBuilder.build(response)['related_content']['next_link']).to be_present
+        expect(subject['related_content']['next_link']).to be_present
       end
 
       it 'body is html' do
-        expect(AttributeBuilder.build(response)['body']).to include('<p><strong>Good money management can mean many things – from living within your means to saving for short and long-term goals, to having a realistic plan to pay off your debts. Read on if you want to learn how to set up a budget, make the most of your money, pay off debts or start saving.</strong></p>')
+        expect(subject['body']).to include('<p><strong>Good money management can mean many things – from living within your means to saving for short and long-term goals, to having a realistic plan to pay off your debts. Read on if you want to learn how to set up a budget, make the most of your money, pay off debts or start saving.</strong></p>')
+      end
+
+      context 'when passing another options' do
+        let(:body) { File.read('spec/fixtures/cms/canllaw-syml-i-reoli-eich-arian.json') }
+        let(:response) { OpenStruct.new(body: JSON.parse(body)) }
+        subject { AttributeBuilder.build(response, locale: 'cy') }
+
+        it 'returns welsh categories' do
+          expect(subject['categories'].size).to be(1)
+          expect(subject['categories'].first.title).to eq('Rheoli arian')
+          expect(subject['categories'].first.id).to eq('managing-money')
+        end
       end
 
       context 'home page' do
         let(:body) { File.read('spec/fixtures/cms/modifiable-home-page.json') }
 
         it 'makes raw attributes acessible' do
-          expect(AttributeBuilder.build(response)['heading']).to eql('head 1')
+          expect(subject['heading']).to eql('head 1')
         end
 
         it 'groups numbered a attributes' do
-          expect(AttributeBuilder.build(response)['tools'][0]['heading']).to eql('head 1')
-          expect(AttributeBuilder.build(response)['tools'][0]['link']).to eql('https://example.com')
+          expect(subject['tools'][0]['heading']).to eql('head 1')
+          expect(subject['tools'][0]['link']).to eql('https://example.com')
         end
       end
     end
