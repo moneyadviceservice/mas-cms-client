@@ -45,7 +45,7 @@ module Mas::Cms::Repository
 
       def set_categories(attributes)
         attributes['categories'] = Array(attributes['category_names']).map do |category_name|
-          Mas::Cms::Category.find(slug: category_name)
+          Mas::Cms::Category.find(category_name)
         end
       end
 

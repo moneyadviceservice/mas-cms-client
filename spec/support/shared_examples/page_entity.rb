@@ -5,7 +5,8 @@ RSpec.shared_examples_for 'a cms page entity' do
 
   describe '.find' do
     let(:response) { double('Response', body: {}) }
-    let(:conn) { spy(:http_connection, get: response) }
+    let(:conn)     { spy(:http_connection, get: response) }
+    let(:slug)     { 'test' }
 
     before do
       allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
@@ -13,7 +14,7 @@ RSpec.shared_examples_for 'a cms page entity' do
 
     it 'uses Attribute Builder to process response' do
       expect(Mas::Cms::Repository::CMS::AttributeBuilder).to receive(:build).with(response)
-      described_class.find(slug: '/test')
+      described_class.find(slug)
     end
   end
 end

@@ -67,14 +67,11 @@ RSpec.describe Mas::Cms::Resource do
         content: 'entity content'
       }
     end
-
-    let(:args) do
-      {
-        locale: 'en',
-        slug: 'how-to-stay-alive'
-      }
+    let(:slug) { 'how-to-stay-alive' }
+    let(:find_options) do
+      { locale: 'en' }
     end
-    let(:entity) { entity_class.find(args) }
+    let(:entity) { entity_class.find(slug, find_options) }
 
     context 'when API call successful' do
       it 'returns an instance of entity' do
@@ -87,7 +84,7 @@ RSpec.describe Mas::Cms::Resource do
       end
 
       it 'returns requested entity' do
-        expect(entity.id).to eq(args[:slug])
+        expect(entity.id).to eq(slug)
       end
 
       it 'returns a fully instanciated entity instance' do
@@ -105,7 +102,7 @@ RSpec.describe Mas::Cms::Resource do
     end
 
     context 'when specific entity class' do
-      let(:entity) { specific_entity_class.find(args) }
+      let(:entity) { specific_entity_class.find(slug, find_options) }
 
       it 'overwrites original parser' do
         expect(entity.call_to_action).to eq(data_attributes[:title])

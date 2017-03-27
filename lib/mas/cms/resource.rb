@@ -16,7 +16,7 @@ module Mas
           (@resource_type || self.name.demodulize.underscore.pluralize).to_s
         end
 
-        def find(slug:, locale: 'en')
+        def find(slug, locale: 'en')
           attributes = process_response(http.get(path(slug: slug, locale: locale)))
           new(slug, attributes)
         end
