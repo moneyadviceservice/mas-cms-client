@@ -5,7 +5,7 @@ require 'faraday/conductivity'
 module Mas
   module Cms
     class Connection
-      attr_reader :raw_connection
+      attr_reader :raw_connection, :cache
 
       Error = Class.new(StandardError) do
         attr_reader :original
@@ -21,7 +21,7 @@ module Mas
       ResourceNotFound    = Class.new(Error)
       UnprocessableEntity = Class.new(Error)
 
-      def initialize
+      def initialize(cache = Mas::Cms::Client.config.cache)
         @raw_connection = Faraday.new(http_options) do |faraday|
           faraday.request :json
           faraday.request :retry, max: config.retries
@@ -31,10 +31,17 @@ module Mas
           faraday.use :instrumentation
           faraday.adapter Faraday.default_adapter
         end
+        @cache = cache
       end
 
-      def get(*args)
-        raw_connection.get(*args)
+      def get(path, cached: Mas::Cms::Client.config.cache_gets)
+        if cache && !!cached
+          cache.fetch(path) do
+            raw_connection.get(path)
+          end
+        else
+          raw_connection.get(path)
+        end
 
       rescue Faraday::Error::ResourceNotFound
         raise ResourceNotFound

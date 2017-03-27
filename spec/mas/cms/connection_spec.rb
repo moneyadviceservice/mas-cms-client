@@ -1,5 +1,6 @@
 RSpec.describe Mas::Cms::Connection do
-  subject(:connection) { described_class.new }
+  subject(:connection) { described_class.new(cache) }
+  let(:cache) { spy(:cache) }
 
   describe '.new' do
     let(:config) { Mas::Cms::Client.config }
@@ -13,19 +14,33 @@ RSpec.describe Mas::Cms::Connection do
       }
     end
 
+    before { allow(Faraday).to receive(:new).with(options) }
+
     it 'builds a connection' do
       expect(Faraday).to receive(:new).with(options)
       Mas::Cms::Connection.new
     end
+
+    it 'accepts a cache object' do
+      conn = Mas::Cms::Connection.new(cache)
+      expect(conn.cache).to eq(cache)
+    end
   end
 
   describe '.get' do
-    let(:params) { '/test/me.json' }
+    let(:path) { '/test/me.json' }
 
-    context 'when successful' do
+    context 'when successful and not cached' do
       it 'delegates to raw_connection' do
-        expect(connection.raw_connection).to receive(:get).with(params)
-        connection.get(params)
+        expect(connection.raw_connection).to receive(:get).with(path)
+        connection.get(path, cached: false)
+      end
+    end
+
+    context 'when successful and cached' do
+      it 'calls cache object' do
+        expect(connection.cache).to receive(:fetch)
+        connection.get(path, cached: true)
       end
     end
 
@@ -33,11 +48,11 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(params)
+          .with(path)
           .and_raise(Faraday::Error::ResourceNotFound, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ResourceNotFound error' do
-        expect { connection.get(params) }.to raise_error(Mas::Cms::Connection::ResourceNotFound)
+        expect { connection.get(path) }.to raise_error(Mas::Cms::Connection::ResourceNotFound)
       end
     end
 
@@ -45,11 +60,11 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(params)
+          .with(path)
           .and_raise(Faraday::Error::ConnectionFailed, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ConnectionFailed error' do
-        expect { connection.get(params) }.to raise_error(Mas::Cms::Connection::ConnectionFailed)
+        expect { connection.get(path) }.to raise_error(Mas::Cms::Connection::ConnectionFailed)
       end
     end
 
@@ -57,11 +72,11 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(params)
+          .with(path)
           .and_raise(Faraday::Error::ClientError, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ClientError error' do
-        expect { connection.get(params) }.to raise_error(Mas::Cms::Connection::ClientError)
+        expect { connection.get(path) }.to raise_error(Mas::Cms::Connection::ClientError)
       end
     end
   end
