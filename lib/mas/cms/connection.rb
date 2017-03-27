@@ -1,25 +1,13 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday/conductivity'
+require_relative './errors/base'
+Dir[File.join(File.dirname(__FILE__), 'errors/*.rb')].each { |f| puts f;  require f }
 
 module Mas
   module Cms
     class Connection
       attr_reader :raw_connection, :cache
-
-      Error = Class.new(StandardError) do
-        attr_reader :original
-
-        def initialize(original = $ERROR_INFO)
-          super
-          @original = original
-        end
-      end
-
-      ClientError         = Class.new(Error)
-      ConnectionFailed    = Class.new(Error)
-      ResourceNotFound    = Class.new(Error)
-      UnprocessableEntity = Class.new(Error)
 
       def initialize(cache = Mas::Cms::Client.config.cache)
         @raw_connection = Faraday.new(http_options) do |faraday|
@@ -44,27 +32,27 @@ module Mas
         end
 
       rescue Faraday::Error::ResourceNotFound
-        raise ResourceNotFound
+        raise Errors::ResourceNotFound
 
       rescue Faraday::Error::ConnectionFailed
-        raise ConnectionFailed
+        raise Errors::ConnectionFailed
 
       rescue Faraday::Error::ClientError
-        raise ClientError
+        raise Errors::ClientError
       end
 
       def post(*args)
         raw_connection.post(*args)
 
       rescue Faraday::Error::ConnectionFailed
-        raise ConnectionFailed
+        raise Errors::ConnectionFailed
 
       rescue Faraday::Error::ClientError => error
         case error.response[:status]
         when 422
-          raise UnprocessableEntity
+          raise Errors::UnprocessableEntity
         else
-          raise ClientError
+          raise Errors::ClientError
         end
       end
 
