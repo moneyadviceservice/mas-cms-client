@@ -149,7 +149,7 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entities
-        expect(conn).to have_received(:get).with('/api/en/poker_card.json')
+        expect(conn).to have_received(:get).with('/api/en/poker_card.json', cached: nil)
       end
 
       context 'locale params defaults to `en`' do

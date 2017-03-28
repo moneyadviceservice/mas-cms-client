@@ -28,8 +28,8 @@ module Mas
           new(slug, attributes)
         end
 
-        def all(locale: 'en')
-          response_body = http.get(path(slug: nil, locale: locale)).body
+        def all(locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
+          response_body = http.get(path(slug: nil, locale: locale), cached: cached).body
           response_body.map do |entity_attrs|
             new(
               entity_attrs.delete(:id),
