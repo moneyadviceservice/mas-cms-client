@@ -28,19 +28,29 @@ RSpec.describe Mas::Cms::Connection do
   end
 
   describe '.get' do
-    let(:path) { '/test/me.json' }
+    let(:path)     { '/test/me.json' }
+    let(:response) { double(status: status, headers: {}) }
+    let(:status)   { 200 }
 
     context 'when successful and not cached' do
       it 'delegates to raw_connection' do
-        expect(connection.raw_connection).to receive(:get).with(path)
+        expect(connection.raw_connection).to receive(:get).with(path).and_return(response)
         connection.get(path, cached: false)
       end
     end
 
     context 'when successful and cached' do
       it 'calls cache object' do
-        expect(connection.cache).to receive(:fetch)
+        expect(connection.cache).to receive(:fetch).and_return(response)
         connection.get(path, cached: true)
+      end
+    end
+
+    context 'when response is a redirection' do
+      before { allow(connection.raw_connection).to receive(:get).and_return(response) }
+      let(:status) { 301 }
+      it 'raises a `HttpRedirect` instance for http 301 status' do
+        expect { connection.get(path) }.to raise_exception Mas::Cms::HttpRedirect
       end
     end
 
@@ -73,14 +83,12 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:get)
           .with(path)
-          .and_raise(Faraday::Error::ClientError, 'foo')
+          .and_raise(Faraday::Error::ClientError.new('foo', status: 500))
       end
       it 'raises an `Mas::Cms::Connection::ClientError error' do
         expect { connection.get(path) }.to raise_error(Mas::Cms::Errors::ClientError)
       end
     end
-
-
   end
 
   describe '.post' do

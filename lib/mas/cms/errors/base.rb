@@ -3,7 +3,7 @@ module Mas
     module Errors
       class Base < StandardError
         attr_reader :original
-        
+
         def initialize(original = $ERROR_INFO)
           super
           @original = original

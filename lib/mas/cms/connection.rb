@@ -1,6 +1,7 @@
 require 'faraday'
 require 'faraday_middleware'
 require 'faraday/conductivity'
+require_relative 'http_redirect'
 require_relative './errors/base'
 Dir[File.join(File.dirname(__FILE__), 'errors/*.rb')].each { |f| puts f;  require f }
 
@@ -23,37 +24,17 @@ module Mas
       end
 
       def get(path, cached: Mas::Cms::Client.config.cache_gets)
-        if cache && !!cached
-          cache.fetch(path) do
-            raw_connection.get(path)
-          end
-        else
-          raw_connection.get(path)
+        with_exception_support do
+          request = -> (_) { raw_connection.get(path) }
+          response = (cache && !!cached ? cache.fetch(path, &request) : request[path])
+
+          raise HttpRedirect.new(response) if HttpRedirect.is_redirect?(response)
+          response
         end
-
-      rescue Faraday::Error::ResourceNotFound
-        raise Errors::ResourceNotFound
-
-      rescue Faraday::Error::ConnectionFailed
-        raise Errors::ConnectionFailed
-
-      rescue Faraday::Error::ClientError
-        raise Errors::ClientError
       end
 
       def post(*args)
-        raw_connection.post(*args)
-
-      rescue Faraday::Error::ConnectionFailed
-        raise Errors::ConnectionFailed
-
-      rescue Faraday::Error::ClientError => error
-        case error.response[:status]
-        when 422
-          raise Errors::UnprocessableEntity
-        else
-          raise Errors::ClientError
-        end
+        with_exception_support { raw_connection.post(*args) }
       end
 
       private
@@ -70,6 +51,23 @@ module Mas
 
       def config
         Mas::Cms::Client.config
+      end
+
+      def with_exception_support(&blk)
+        blk.call
+      rescue Faraday::Error::ResourceNotFound
+        raise Errors::ResourceNotFound
+
+      rescue Faraday::Error::ConnectionFailed
+        raise Errors::ConnectionFailed
+
+      rescue Faraday::Error::ClientError => error
+        case error.response[:status]
+        when 422
+          raise Errors::UnprocessableEntity
+        else
+          raise Errors::ClientError
+        end
       end
     end
   end
