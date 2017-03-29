@@ -16,6 +16,10 @@ module Mas
           (@resource_type || name.demodulize.underscore.pluralize).to_s
         end
 
+        def api_prefix
+          '/api'.freeze
+        end
+
         def find(slug, locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
           attributes = resource_attributes(
             http.get(
@@ -38,8 +42,12 @@ module Mas
           end
         end
 
-        def api_prefix
-          '/api'.freeze
+        def create(attributes={})
+          body = http.post(
+            path(slug: attributes[:slug], locale: attributes[:locale]),
+            attributes
+          ).body
+          new(body[:id], body)
         end
 
         private

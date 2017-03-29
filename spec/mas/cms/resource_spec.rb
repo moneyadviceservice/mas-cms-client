@@ -159,4 +159,29 @@ RSpec.describe Mas::Cms::Resource do
       end
     end
   end
+
+  describe '.create' do
+    let(:data_attributes) { { title: 'chuck norris', content: 'death once had a near chuck norris experience' } }
+    let(:conn) { spy(:http_connection, post: double(body: data_attributes)) }
+    let(:args) do
+      {
+        locale: 'en',
+        session_id: 'snthaoesrcaoehdusnaoteuh',
+        slug: 'how-to-train-your-dragon',
+        liked: true
+      }
+    end
+    let(:entity) { entity_class.create(args) }
+
+    context 'when successful' do
+      it 'returns a instance of entity_class' do
+        expect(entity).to be_instance_of(entity_class)
+      end
+      
+      it 'entity instance has attributes set' do
+        expect(entity.title).to eq(data_attributes[:title])
+        expect(entity.content).to eq(data_attributes[:content])
+      end
+    end
+  end
 end
