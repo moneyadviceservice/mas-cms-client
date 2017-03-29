@@ -1,5 +1,6 @@
 module Mas::Cms
   class Clump < Entity
+    include Mas::Cms::Resource
     attr_accessor :name, :description, :categories, :links
     validates_presence_of :name, :description
 
@@ -10,6 +11,9 @@ module Mas::Cms
         categories: categories,
         links: links
       }
+    end
+
+    def self.api_prefix
     end
   end
 end

@@ -38,6 +38,10 @@ module Mas
           end
         end
 
+        def api_prefix
+          '/api'.freeze
+        end
+
         private
 
         def process_response(response, options={})
@@ -46,7 +50,7 @@ module Mas
 
         def path(slug:, locale:)
           [
-           '/api',
+           api_prefix,
            locale,
            resource_name,
            slug
