@@ -50,6 +50,14 @@ module Mas
           new(body[:id], body)
         end
 
+        def update(attributes={})
+          body = http.patch(
+            path(slug: attributes[:slug], locale: attributes[:locale]),
+            attributes
+          ).body
+          new(body[:id], body)
+        end
+
         private
 
         def resource_attributes(response_body, _)

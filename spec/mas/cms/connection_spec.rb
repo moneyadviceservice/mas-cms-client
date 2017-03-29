@@ -137,4 +137,27 @@ RSpec.describe Mas::Cms::Connection do
       end
     end
   end
+
+  describe '.post' do
+    let(:params) { '/test/me.json' }
+
+    context 'when successfull' do
+      it 'delegates to raw_connection' do
+        expect(connection.raw_connection).to receive(:patch).with(params)
+        connection.patch(params)
+      end
+    end
+
+    context 'when unprocessable entity' do
+      before do
+        allow(connection.raw_connection)
+          .to receive(:patch)
+          .with(params)
+          .and_raise(Faraday::Error::ClientError.new('foo', status: 422))
+      end
+      it 'raises an `Mas::Cms::Connection::UnprocessableEntity error' do
+        expect { connection.patch(params) }.to raise_error(Mas::Cms::Errors::UnprocessableEntity)
+      end
+    end
+  end
 end

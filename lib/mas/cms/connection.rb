@@ -38,6 +38,10 @@ module Mas
         with_exception_support { raw_connection.post(*args) }
       end
 
+      def patch(*args)
+        with_exception_support { raw_connection.patch(*args) }
+      end
+
       private
 
       def http_options
