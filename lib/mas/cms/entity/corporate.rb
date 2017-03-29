@@ -1,5 +1,7 @@
 module Mas::Cms
   class Corporate < Article
+    resource_type :corporate
+
     def previous_link
       corporate_navigation_link 'previous_link'
     end

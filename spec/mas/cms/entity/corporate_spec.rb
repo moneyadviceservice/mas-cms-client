@@ -1,5 +1,6 @@
 module Mas::Cms
   RSpec.describe Corporate, type: :model do
+    it_has_behavior 'a cms page entity'
     subject { described_class.new(double, attributes) }
 
     let(:categories) { [] }
@@ -27,6 +28,16 @@ module Mas::Cms
         categories:  categories,
         related_content: related_content
       }
+    end
+
+    it 'be an Article' do
+      expect(described_class.superclass).to be(Article)
+    end
+
+    describe '.resource_name' do
+      it 'returns "corporate"' do
+        expect(described_class.resource_name).to eq('corporate')
+      end
     end
 
     describe '#previous_link' do

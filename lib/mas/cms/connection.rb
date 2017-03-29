@@ -3,7 +3,7 @@ require 'faraday_middleware'
 require 'faraday/conductivity'
 require_relative 'http_redirect'
 require_relative './errors/base'
-Dir[File.join(File.dirname(__FILE__), 'errors/*.rb')].each { |f| puts f;  require f }
+Dir[File.join(File.dirname(__FILE__), 'errors/*.rb')].each { |f| require f }
 
 module Mas
   module Cms
