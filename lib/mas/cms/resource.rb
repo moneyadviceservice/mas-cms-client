@@ -13,7 +13,7 @@ module Mas
         end
 
         def resource_name
-          (@resource_type || self.name.demodulize.underscore.pluralize).to_s
+          (@resource_type || name.demodulize.underscore.pluralize).to_s
         end
 
         def find(slug, locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
@@ -44,19 +44,19 @@ module Mas
 
         private
 
-        def resource_attributes(response_body, options={})
+        def resource_attributes(response_body, _)
           response_body
         end
 
         def path(slug:, locale:)
           [
-           api_prefix,
-           locale,
-           resource_name,
-           slug
+            api_prefix,
+            locale,
+            resource_name,
+            slug
           ].compact
-           .join('/')
-           .downcase + '.json'
+            .join('/')
+            .downcase + '.json'
         end
 
         def http

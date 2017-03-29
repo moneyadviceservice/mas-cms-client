@@ -13,7 +13,7 @@ RSpec.describe Mas::Cms::Resource do
       attr_accessor :call_to_action, :body_content
       include Mas::Cms::Resource
 
-      def self.resource_attributes(response_body, options)
+      def self.resource_attributes(response_body, _options)
         {
           call_to_action: response_body[:title],
           body_content: response_body[:content]
@@ -96,7 +96,7 @@ RSpec.describe Mas::Cms::Resource do
       end
 
       context 'locale params defaults to `en`' do
-        let(:args) { {slug: 'no-way'} }
+        let(:args) { { slug: 'no-way' } }
 
         it 'returns an instance of entity' do
           expect(entity).to be_instance_of(A)
@@ -131,9 +131,7 @@ RSpec.describe Mas::Cms::Resource do
     end
 
     let(:args) do
-      {
-        locale: 'en',
-      }
+      { locale: 'en' }
     end
     let(:entities) { entity_class.all(args) }
 
