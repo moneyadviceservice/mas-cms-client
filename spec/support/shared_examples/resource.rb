@@ -12,9 +12,8 @@ RSpec.shared_examples_for 'a cms resource entity' do
       allow(Mas::Cms::Client).to receive(:connection).and_return(conn)
     end
 
-    it 'uses Attribute Builder to process response' do
-      expect(Mas::Cms::Repository::CMS::AttributeBuilder).to receive(:build)
-        .with(response, locale: 'en', cached: nil)
+    it 'uses to process response' do
+      expect(conn).to receive(:get)
       described_class.find(slug)
     end
   end

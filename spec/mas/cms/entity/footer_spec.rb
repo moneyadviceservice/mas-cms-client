@@ -1,4 +1,5 @@
 RSpec.describe Mas::Cms::Footer, type: :model do
+  it_has_behavior 'a cms resource entity'
   let(:params) do
     {
       label: 'Footer',

@@ -1,5 +1,6 @@
 module Mas::Cms
   class Footer < Entity
+    include Mas::Cms::Resource
     attr_writer :blocks
 
     def contact
