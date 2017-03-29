@@ -29,8 +29,6 @@ module Mas
     autoload :NewsCollection, 'mas/cms/entity/news_collection'
     autoload :Other, 'mas/cms/entity/other'
     autoload :PageFeedback, 'mas/cms/entity/page_feedback'
-    autoload :SearchResult, 'mas/cms/entity/search_result'
-    autoload :SearchResultCollection, 'mas/cms/entity/search_result_collection'
     autoload :StaticPage, 'mas/cms/entity/static_page'
     autoload :Customer, 'mas/cms/entity/customer'
     autoload :Video, 'mas/cms/entity/video'
