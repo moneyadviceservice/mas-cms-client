@@ -14,15 +14,22 @@ module Mas::Cms
     end
 
     class << self
-      def api_prefix
-      end
+      def api_prefix; end
 
-      def resource_attributes(response_body, options={})
+      def resource_attributes(response_body, _)
         body = response_body.dup
+        body['categories'] = Array(body['categories']).map { |category| build_category(category) }
+        body['links'] = Array(body['links']).map { |link| ClumpLink.new(link['id'], link) }
         body
       end
 
       private
+
+      def build_category(attributes)
+        Category.new(attributes['id'], attributes).tap do |category|
+          category.contents = Array(attributes['contents']).map { |content| build_category(content) }
+        end
+      end
     end
   end
 end
