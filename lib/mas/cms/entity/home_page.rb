@@ -1,5 +1,5 @@
 module Mas::Cms
-  class HomePage < Entity
+  class HomePage < Page
     Alternate = Struct.new(:title, :url, :hreflang)
 
     # TODO remove a few of these
