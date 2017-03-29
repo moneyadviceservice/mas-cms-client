@@ -17,7 +17,7 @@ module Mas
     autoload :Article, 'mas/cms/entity/article'
     autoload :HomePage, 'mas/cms/entity/home_page'
     autoload :Contact, 'mas/cms/entity/contact'
-    autoload :CorporateArticle, 'mas/cms/entity/corporate_article'
+    autoload :Corporate, 'mas/cms/entity/corporate'
     autoload :ArticleLink, 'mas/cms/entity/article_link'
     autoload :Category, 'mas/cms/entity/category'
     autoload :Clump, 'mas/cms/entity/clump'

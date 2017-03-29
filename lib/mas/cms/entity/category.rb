@@ -32,7 +32,7 @@ module Mas::Cms
           'guide'       => Article,
           'action_plan' => ActionPlan,
           'article'     => Article,
-          'corporate'   => CorporateArticle,
+          'corporate'   => Corporate,
           'footer'      => Footer,
           'home_page'   => HomePage,
           'news'        => NewsArticle,

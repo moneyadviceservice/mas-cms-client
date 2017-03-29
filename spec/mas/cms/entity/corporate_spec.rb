@@ -1,5 +1,5 @@
 module Mas::Cms
-  RSpec.describe CorporateArticle, type: :model do
+  RSpec.describe Corporate, type: :model do
     subject { described_class.new(double, attributes) }
 
     let(:categories) { [] }

@@ -18,6 +18,7 @@ module Mas
           faraday.response :raise_error
           faraday.response :json
           faraday.use :instrumentation
+          faraday.token_auth config.api_token
           faraday.adapter Faraday.default_adapter
         end
         @cache = cache
