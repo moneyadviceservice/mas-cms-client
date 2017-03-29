@@ -13,7 +13,16 @@ module Mas::Cms
       }
     end
 
-    def self.api_prefix
+    class << self
+      def api_prefix
+      end
+
+      def resource_attributes(response_body, options={})
+        body = response_body.dup
+        body
+      end
+
+      private
     end
   end
 end

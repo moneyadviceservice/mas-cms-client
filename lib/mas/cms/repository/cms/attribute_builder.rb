@@ -3,19 +3,19 @@ require 'mas/cms/repository/cms/block_composer'
 module Mas::Cms::Repository
   module CMS
     class AttributeBuilder
-      attr_reader :response, :options
+      attr_reader :response_body, :options
 
-      def initialize(response, options={})
-        @response = response
+      def initialize(response_body, options={})
+        @response_body = response_body
         @options = options
       end
 
-      def self.build(response, options)
-        new(response, options).attributes
+      def self.build(response_body, options)
+        new(response_body, options).attributes
       end
 
       def attributes
-        attributes = response.body
+        attributes = response_body
 
         set_title_from_label(attributes)
         set_body_from_content_block(attributes)

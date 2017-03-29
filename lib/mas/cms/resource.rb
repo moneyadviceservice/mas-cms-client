@@ -17,11 +17,11 @@ module Mas
         end
 
         def find(slug, locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
-          attributes = process_response(
+          attributes = resource_attributes(
             http.get(
               path(slug: slug, locale: locale),
               cached: cached
-            ),
+            ).body,
             locale: locale,
             cached: cached
           )
@@ -33,7 +33,7 @@ module Mas
           response_body.map do |entity_attrs|
             new(
               entity_attrs.delete(:id),
-              entity_attrs
+              resource_attributes(entity_attrs, locale: locale, cached: cached)
             )
           end
         end
@@ -44,8 +44,8 @@ module Mas
 
         private
 
-        def process_response(response, options={})
-          response.body
+        def resource_attributes(response_body, options={})
+          response_body
         end
 
         def path(slug:, locale:)

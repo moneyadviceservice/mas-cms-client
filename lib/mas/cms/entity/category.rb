@@ -5,8 +5,8 @@ module Mas::Cms
     validates_presence_of :title
 
     class << self
-      def process_response(response, options={})
-        body = response.body.dup
+      def resource_attributes(response_body, options={})
+        body = response_body.dup
         body[:contents] = build_contents(body[:contents], options)
         body[:legacy_contents] = build_contents(body[:legacy_contents], options)
         body

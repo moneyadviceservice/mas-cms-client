@@ -25,7 +25,7 @@ module Mas::Cms
       expect(described_class.included_modules).to include(Mas::Cms::Resource)
     end
 
-    describe '.process_response' do
+    describe '.resource_attributes' do
       context 'when type is category' do
         let(:response) do
           double(body: ActiveSupport::HashWithIndifferentAccess.new(response_body))
@@ -41,7 +41,7 @@ module Mas::Cms
 
         it 'calls find on Category resource with locales' do
           expect(Category).to receive(:find).with('making-will', locale: 'cy', cached: true)
-          Category.process_response(response, locale: 'cy', cached: true)
+          Category.resource_attributes(response.body, locale: 'cy', cached: true)
         end
       end
     end

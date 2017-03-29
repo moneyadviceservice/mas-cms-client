@@ -1,3 +1,4 @@
+# coding: utf-8
 require 'mas/cms/repository/cms/attribute_builder'
 
 module Mas::Cms::Repository::CMS
@@ -7,11 +8,11 @@ module Mas::Cms::Repository::CMS
     let(:options) { { locale: 'en' } }
 
     describe '.build' do
-      subject { AttributeBuilder.build(response, options) }
+      subject { AttributeBuilder.build(response.body, options) }
 
       it 'instantiate an attribute builder passing response and options' do
         attribute_builder = double(attributes: {})
-        expect(AttributeBuilder).to receive(:new).with(response, options).and_return(attribute_builder)
+        expect(AttributeBuilder).to receive(:new).with(response.body, options).and_return(attribute_builder)
         subject
       end
 
@@ -67,7 +68,7 @@ module Mas::Cms::Repository::CMS
       context 'when passing another options' do
         let(:body) { File.read('spec/fixtures/cms/canllaw-syml-i-reoli-eich-arian.json') }
         let(:response) { OpenStruct.new(body: JSON.parse(body)) }
-        subject { AttributeBuilder.build(response, locale: 'cy') }
+        subject { AttributeBuilder.build(response.body, locale: 'cy') }
 
         it 'returns welsh categories' do
           expect(subject['categories'].size).to be(1)
