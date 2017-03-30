@@ -10,6 +10,7 @@ module Mas
     class Connection
       attr_reader :raw_connection, :cache
 
+      # rubocop:disable Metrics/AbcSize
       def initialize(cache = Mas::Cms::Client.config.cache)
         @raw_connection = Faraday.new(http_options) do |faraday|
           faraday.request :json
@@ -23,6 +24,7 @@ module Mas
         end
         @cache = cache
       end
+      # rubocop:enable Metrics/AbcSize
 
       def get(path, cached: Mas::Cms::Client.config.cache_gets)
         with_exception_support do
