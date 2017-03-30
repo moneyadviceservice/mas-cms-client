@@ -1,7 +1,6 @@
 require 'mas/cms/connection'
 require 'mas/cms/resource'
 require 'mas/cms/client/version'
-require 'mas/cms/client'
 require 'active_model'
 require 'ostruct'
 require 'active_support/core_ext'

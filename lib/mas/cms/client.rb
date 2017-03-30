@@ -1,3 +1,4 @@
+require_relative '../cms'
 require 'mas/cms/config'
 
 module Mas
