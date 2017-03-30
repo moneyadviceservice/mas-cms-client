@@ -5,7 +5,7 @@ module Mas
       attr_reader :http_response
 
       class << self
-        def is_redirect?(http_response)
+        def redirect?(http_response)
           STATUSES.include?(http_response.status)
         end
       end

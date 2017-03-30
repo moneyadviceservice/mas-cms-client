@@ -20,7 +20,7 @@ RSpec.describe Mas::Cms::Config do
 
   [:timeout, :open_timeout, :host, :api_token, :retries, :cache, :cache_gets].each do |attr|
     it "responds to `#{attr}`" do
-      expect(config.send(attr)).to eq self.send(attr)
+      expect(config.send(attr)).to eq send(attr)
     end
   end
 end

@@ -9,7 +9,6 @@ require 'tree'
 
 module Mas
   module Cms
-
     # API Resources
     autoload :Page, 'mas/cms/entity/page'
 

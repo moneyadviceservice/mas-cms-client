@@ -26,10 +26,10 @@ module Mas
 
       def get(path, cached: Mas::Cms::Client.config.cache_gets)
         with_exception_support do
-          request = -> (_) { raw_connection.get(path) }
+          request = ->(_) { raw_connection.get(path) }
           response = (cache && !!cached ? cache.fetch(path, &request) : request[path])
 
-          raise HttpRedirect.new(response) if HttpRedirect.is_redirect?(response)
+          raise HttpRedirect.new(response) if HttpRedirect.redirect?(response)
           response
         end
       end
@@ -59,7 +59,7 @@ module Mas
       end
 
       def with_exception_support(&blk)
-        blk.call
+        yield blk
       rescue Faraday::Error::ResourceNotFound
         raise Errors::ResourceNotFound
 

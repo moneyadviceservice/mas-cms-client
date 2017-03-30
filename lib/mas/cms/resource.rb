@@ -42,7 +42,7 @@ module Mas
           end
         end
 
-        def create(attributes={})
+        def create(attributes = {})
           body = http.post(
             path(slug: attributes[:slug], locale: attributes[:locale]),
             attributes
@@ -50,7 +50,7 @@ module Mas
           new(body[:id], body)
         end
 
-        def update(attributes={})
+        def update(attributes = {})
           body = http.patch(
             path(slug: attributes[:slug], locale: attributes[:locale]),
             attributes
