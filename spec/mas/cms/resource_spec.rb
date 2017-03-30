@@ -83,7 +83,8 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entity
-        expect(conn).to have_received(:get).with('/api/en/poker_card/how-to-stay-alive.json', cached: find_options[:cached])
+        expect(conn).to have_received(:get)
+          .with('/api/en/poker_card/how-to-stay-alive.json', cached: find_options[:cached])
       end
 
       it 'returns requested entity' do
@@ -186,7 +187,9 @@ RSpec.describe Mas::Cms::Resource do
   end
 
   describe '.update' do
-    let(:data_attributes) { { title: 'chuck norris', content: 'death once had a near chuck norris experience' } }
+    let(:data_attributes) do
+      { title: 'chuck norris', content: 'death once had a near chuck norris experience' }
+    end
     let(:conn) { spy(:http_connection, patch: double(body: data_attributes)) }
     let(:args) do
       {

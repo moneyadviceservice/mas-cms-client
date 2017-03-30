@@ -1,7 +1,7 @@
 module Mas
   module Cms
-    class HttpRedirect < Exception
-      STATUSES = [301, 302]
+    class HttpRedirect < RuntimeError
+      STATUSES = [301, 302].freeze
       attr_reader :http_response
 
       class << self

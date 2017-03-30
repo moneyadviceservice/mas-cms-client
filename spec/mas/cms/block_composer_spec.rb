@@ -58,7 +58,7 @@ module Mas::Cms::Repository::CMS
         let(:blocks) { [] }
 
         it 'is an empty string' do
-          expect(composer.to_html).to eql("")
+          expect(composer.to_html).to eql('')
         end
       end
 
@@ -70,7 +70,7 @@ module Mas::Cms::Repository::CMS
         let(:blocks) { [non_content_block] }
 
         it 'returns a composed html string' do
-          expect(composer.to_html).to eql("")
+          expect(composer.to_html).to eql('')
         end
       end
     end

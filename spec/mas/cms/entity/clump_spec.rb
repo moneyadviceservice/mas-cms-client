@@ -26,7 +26,7 @@ module Mas::Cms
       let(:entity_attrs) do
         {
           'name' => 'Debt & Borrowing',
-          'description' => 'Taking control of debt, free debt advice, improving your credit score and low-cost borrowing',
+          'description' => 'Taking control of debt, improving your credit score and low-cost borrowing',
           'links' => [
             { 'id' => 1, 'text' => 'Debt test', 'url' => '/en/tools/debt-test', 'style' => 'tool' }
           ],

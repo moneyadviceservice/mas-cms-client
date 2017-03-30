@@ -33,6 +33,7 @@ Lint/ShadowingOuterLocalVariable:
 Rails:
   Enabled: true
 AllCops:
+  DisplayCopNames: true
   Exclude:
   - 'app/helpers/application_helper.rb'
   - 'bin/**/*'

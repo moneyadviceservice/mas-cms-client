@@ -18,6 +18,6 @@ module Mas::Cms
     def ==(other)
       self.class == other.class && id == other.id
     end
-    alias_method :eql?, :==
+    alias eql? ==
   end
 end

@@ -21,24 +21,27 @@ module Mas::Cms::Repository::CMS
       end
 
       it 'returns description' do
-        expect(subject['description']).to eq("How to set up a budget, keep on top of your debts and start to save regularly")
+        expected = 'How to set up a budget, keep on top of your debts and start to save regularly'
+        expect(subject['description']).to eq(expected)
       end
 
       it 'returns categories' do
-        expected = ["managing-money", "taking-control-of-debt"].map do |category_name|
+        expected = ['managing-money', 'taking-control-of-debt'].map do |category_name|
           Mas::Cms::Category.new(category_name, {})
         end
         expect(subject['categories']).to eq(expected)
       end
 
       it 'returns alternates' do
-        expect(subject['alternates']).to eq([
-          {
-            title: 'Canllaw syml i reoli eich arian',
-            url: '/cy/articles/canllaw-syml-i-reoli-eich-arian',
-            hreflang: 'cy'
-          }
-        ])
+        expect(subject['alternates']).to eq(
+          [
+            {
+              title: 'Canllaw syml i reoli eich arian',
+              url: '/cy/articles/canllaw-syml-i-reoli-eich-arian',
+              hreflang: 'cy'
+            }
+          ]
+        )
       end
 
       it 'returns popular links' do
@@ -62,6 +65,7 @@ module Mas::Cms::Repository::CMS
       end
 
       it 'body is html' do
+        # rubocop:disable LineLength
         expect(subject['body']).to include('<p><strong>Good money management can mean many things – from living within your means to saving for short and long-term goals, to having a realistic plan to pay off your debts. Read on if you want to learn how to set up a budget, make the most of your money, pay off debts or start saving.</strong></p>')
       end
 

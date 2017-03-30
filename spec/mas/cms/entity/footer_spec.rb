@@ -4,7 +4,7 @@ RSpec.describe Mas::Cms::Footer, type: :model do
     {
       label: 'Footer',
       blocks: [
-        { 'identifier' => 'raw_web_chat_heading', 'content'=>'Web Chat' },
+        { 'identifier' => 'raw_web_chat_heading', 'content' => 'Web Chat' },
         { 'identifier' => 'raw_web_chat_additional_one', 'content' => 'Monday to Friday, 8am to 8pm' },
         { 'identifier' => 'raw_web_chat_additional_two', 'content' => 'Saturday, 9am to 1pm' },
         { 'identifier' => 'raw_web_chat_additional_three', 'content' => 'Sunday and Bank Holidays, closed' },

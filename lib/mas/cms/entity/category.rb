@@ -1,11 +1,13 @@
 module Mas::Cms
   class Category < Entity
     include Mas::Cms::Resource
-    attr_accessor :type, :parent_id, :title, :description, :contents, :third_level_navigation, :images, :links, :category_promos, :legacy_contents, :legacy
+    attr_accessor :type, :parent_id, :title, :description, :contents,
+                  :third_level_navigation, :images, :links, :category_promos,
+                  :legacy_contents, :legacy
     validates_presence_of :title
 
     class << self
-      def resource_attributes(response_body, options={})
+      def resource_attributes(response_body, options = {})
         body = response_body.dup
         body[:contents] = build_contents(body[:contents], options)
         body[:legacy_contents] = build_contents(body[:legacy_contents], options)
@@ -13,6 +15,7 @@ module Mas::Cms
       end
 
       private
+
       def build_contents(contents, options)
         return [] unless contents.present?
 

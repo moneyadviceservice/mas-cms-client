@@ -13,8 +13,7 @@ module Mas::Cms
       []
     end
 
-    def categories=(_value)
-    end
+    def categories=(_value); end
 
     private
 

@@ -3,7 +3,8 @@ module Mas::Cms
     subject { described_class.new(double, attributes) }
 
     let(:attributes) do
-      { title:        double,
+      {
+        title:        double,
         description:  double,
         body:         double,
         translations: [{ label: double, link: double('link').as_null_object, language: double }.stringify_keys]
@@ -25,7 +26,9 @@ module Mas::Cms
       let(:url) { 'www.example.com/corporate/foo' }
       let(:hreflang) { 'cy' }
 
-      before { subject.translations = ([{ label: alternate_title, link: url, language: hreflang }.stringify_keys]) }
+      before do
+        subject.translations = [{ label: alternate_title, link: url, language: hreflang }.stringify_keys]
+      end
 
       it 'assigns alternate title' do
         expect(subject.alternates.first.title).to eq(alternate_title)

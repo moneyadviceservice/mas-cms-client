@@ -1,11 +1,13 @@
 RSpec.describe Mas::Cms::Video, type: :model do
   let(:params) do
-    { type: 'no-idea-about-type',
+    {
+      type: 'no-idea-about-type',
       title: 'awesome-title',
       description: 'awesome-description',
       body: 'awesome-body',
       categories: [:foo, :bar],
-      alternates: [:cy]}
+      alternates: [:cy]
+    }
   end
 
   subject do
@@ -14,7 +16,7 @@ RSpec.describe Mas::Cms::Video, type: :model do
 
   describe 'attributes' do
     it 'are set' do
-      %i{ type title description body categories alternates }.each do |attr|
+      %i(type title description body categories alternates).each do |attr|
         expect(subject.public_send(attr)).to eql(params[attr])
       end
     end

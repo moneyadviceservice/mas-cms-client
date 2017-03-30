@@ -27,7 +27,7 @@ module Mas
       def get(path, cached: Mas::Cms::Client.config.cache_gets)
         with_exception_support do
           request = ->(_) { raw_connection.get(path) }
-          response = (cache && !!cached ? cache.fetch(path, &request) : request[path])
+          response = fetch_from_cache_or_request(path, cached, &request)
 
           raise HttpRedirect.new(response) if HttpRedirect.redirect?(response)
           response
@@ -73,6 +73,10 @@ module Mas
         else
           raise Errors::ClientError
         end
+      end
+
+      def fetch_from_cache_or_request(path, cached, &request)
+        cache && !!cached ? cache.fetch(path, &request) : request[path]
       end
     end
   end

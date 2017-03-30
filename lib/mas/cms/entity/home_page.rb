@@ -2,7 +2,6 @@ module Mas::Cms
   class HomePage < Page
     Alternate = Struct.new(:title, :url, :hreflang)
 
-    # TODO remove a few of these
     attr_accessor :type, :slug, :identifier, :title, :description, :body,
                   :categories, :related_content, :promo,
                   :heading, :hero_image,

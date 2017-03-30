@@ -45,7 +45,7 @@ module Mas::Cms
       'baby-costs-calculator',
       'cyfrifiannell-costau-babi',
       'debt-management-companies'
-    ]
+    ].freeze
 
     def accepts_feedback?
       !EXCLUDED_FROM_FEEDBACK.include?(slug)

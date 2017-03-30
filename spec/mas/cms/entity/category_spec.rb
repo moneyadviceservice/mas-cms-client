@@ -15,7 +15,8 @@ module Mas::Cms
       }
     end
 
-    it { is_expected.to have_attributes(:type, :parent_id, :title, :description, :contents, :images, :links, :category_promos, :legacy_contents) }
+    it { is_expected.to have_attributes(:type, :parent_id, :title, :description, :contents) }
+    it { is_expected.to have_attributes(:images, :links, :category_promos, :legacy_contents) }
     it { is_expected.to validate_presence_of(:title) }
 
     specify { expect(subject).to_not be_home }
@@ -46,7 +47,7 @@ module Mas::Cms
       end
     end
 
-    describe "category hierarchy" do
+    describe 'category hierarchy' do
       let(:category_with_nil_contents) { build :category, contents: nil }
       let(:child_category) { build :category, contents: [build(:article), build(:action_plan)] }
       let(:parent_category) { build :category, contents: [child_category] }

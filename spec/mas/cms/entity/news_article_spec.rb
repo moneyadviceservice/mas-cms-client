@@ -13,7 +13,7 @@ module Mas::Cms
       end
 
       it 'parses the data value' do
-        expect(subject.date).to eq(DateTime.parse(date))
+        expect(subject.date).to eq(DateTime.parse(date).utc.to_datetime)
       end
     end
   end

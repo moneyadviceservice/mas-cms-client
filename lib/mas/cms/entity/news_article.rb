@@ -3,7 +3,7 @@ module Mas::Cms
     attr_reader :date
 
     def date=(date)
-      @date = DateTime.parse(date)
+      @date = DateTime.parse(date).utc.to_datetime
     end
   end
 end
