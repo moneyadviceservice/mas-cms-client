@@ -1,4 +1,6 @@
 RSpec.describe Mas::Cms::Video, type: :model do
+  it_has_behavior 'a cms resource entity'
+
   let(:params) do
     {
       type: 'no-idea-about-type',
