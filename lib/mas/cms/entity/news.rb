@@ -1,5 +1,5 @@
 module Mas::Cms
-  class NewsArticle < Article
+  class News < Article
     attr_reader :date
 
     def date=(date)

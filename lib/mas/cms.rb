@@ -23,7 +23,7 @@ module Mas
     autoload :CorporateCategory, 'mas/cms/entity/corporate_category'
     autoload :Entity, 'mas/cms/entity'
     autoload :Footer, 'mas/cms/entity/footer'
-    autoload :NewsArticle, 'mas/cms/entity/news_article'
+    autoload :News, 'mas/cms/entity/news'
     autoload :NewsCollection, 'mas/cms/entity/news_collection'
     autoload :Other, 'mas/cms/entity/other'
     autoload :PageFeedback, 'mas/cms/entity/page_feedback'

@@ -38,7 +38,7 @@ module Mas::Cms
           'corporate'   => Corporate,
           'footer'      => Footer,
           'home_page'   => HomePage,
-          'news'        => NewsArticle,
+          'news'        => News,
           'tool'        => Other,
           'video'       => Video
         }
