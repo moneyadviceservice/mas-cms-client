@@ -2,32 +2,45 @@
 
 ## Purpose
 
-Provide a library responsible for the communication with `MAS CMS`.
+This library provides an application programming interface (API) for retrieving
+data from the MAS content management system.
 
-It provides a caching mechanism, support different locales and raise a few exceptions which can be used to detect connection issues and http redirection.
+## Features
+  - Content caching
+  - Loading locale-specific content
+  - Diagnosis for HTTP connections
 
 ## Installation
 
-Add this line to your application's Gemfile:
+### In Gemfile
+In order to install this as part of your application.
+
+1. Add this line to your application's Gemfile:
 
 ```ruby
 gem 'mas-cms-client'
 ```
 
-And then execute:
+2. Install using `bundler`:
 
-    $ bundle
+    `$ bundle`
 
-Or install it yourself as:
+### In Local Ruby Gemset (1)
+Or install it as part of your global gemset:
 
-    $ gem install mas-cms-client
+    `$ gem install mas-cms-client`
 
+### In Local Ruby Gemset (2)
+Install this gem onto your local machine,
+    `$ bundle exec rake install`
 
 ## Configuration
-
-Being you are able to use the different entity classes available, you have to configure the library.
+The following example should help you to configure your application to fetch
+data from the content management system.
 
 ```ruby
+#in file: config/initializers/mas_cms_client.rb`
+
 Mas::Cms::Client.config do |c|
   # Integer, time in seconds spent waiting for connection to be established
   c.timeout =  ENV['HTTP_REQUEST_TIMEOUT'].to_i
@@ -35,19 +48,19 @@ Mas::Cms::Client.config do |c|
   # Integer, time in seconds spent waiting while the connection is established
   c.open_timeout =  ENV['HTTP_REQUEST_TIMEOUT'].to_i
 
-  # String, api token used while submitting a page feedback
+  # String, API token used while submitting a page feedback
   c.api_token =  ENV['MAS_CMS_API_TOKEN']
 
-  # String, represents CMS URL that the gem will make the requests to.
+  # String, CMS URL endpoint for all http requests
   c.host =  ENV['MAS_CMS_URL']
 
-  # Integer, control how many http retries are done before erroring
+  # Integer, control how many http retries are done before throwinf an error
   c.retries = 1
 
   # Ruby Object, must respond to `.fetch(key, &block)`
   c.cache = Rails.cache
 
-  # Boolean, controls the default setting for caching ALL 'GET' api calls
+  # Boolean, controls the default setting for caching ALL 'GET' API calls
   c.cache_gets  = false
 end
 ```
@@ -59,23 +72,23 @@ In a Rails project you would have that snippet in a `config/initializers/mas_cms
 ### Page API
 
 This is an object representing every cms page created by the editors team.
-You can retrieve the page, to see the page content and related content too.
-Every page has your own type.
+You can retrieve the page, to see the page content and related content.
+Every page has its own type.
 
-These are the following types that the gem supports:
+The gems supports the following types:
 
-* Article
-* Action Plan
-* Corporate
-* News
-* Video
-* Home Page
-* Footer
+  * Article
+  * Action Plan
+  * Corporate
+  * News
+  * Video
+  * Home Page
+  * Footer
 
 The CMS API only support a GET request to pages at the moment
 and you can **find any page** by the following:
 
-Each line described below will make a request to CMS to your own page type:
+Some examples of how to retrieve data from the CMS are given below.
 
 ```ruby
 Mas::Cms::Article.find('how-to-apply-for-a-mortgage')
@@ -100,7 +113,7 @@ Mas::Cms::Footer.find('footer')
 # GET /api/en/footers/footer.json
 ```
 
-### Locale feature
+### Switching Locale
 
 The gem *uses 'en' locale* as default. But you can pass another locale as
 option:
@@ -110,7 +123,7 @@ Mas::Cms::Article.find('canllaw-i-dreth-etifeddiaeth', locale: 'cy')
 # GET http://localhost:3000/api/cy/articles/canllaw-i-dreth-etifeddiaeth.json
 ```
 
-If you're using Rails, you can take advatnage on the I18n module:
+If you're using Rails, you can take advantage of the I18n module:
 
 ```ruby
 I18n.locale
@@ -122,11 +135,12 @@ Mas::Cms::Article.find('canllaw-i-dreth-etifeddiaeth', locale: I18n.locale)
 
 ## Cache requests
 
-In this example the first parameter of the method `params[:id]` reprensents the article's slug ie 'personal-pensions'. It is a mandatory parameter.
-If the :cached is true, the gem will fetch the cache from the object passed in
+In this example the first parameter of the method `params[:id]` represents the article's slug i.e. 'personal-pensions'. It is a mandatory parameter.
+If the option for `:cached` is set to true the gem will fetch the cache from the object passed in [TODO: needs further clarity. _Did you mean to say that the gem will fetch the object from the cache?_].
+
 `Mas::Cms::Client.config.cache` (usually Rails.cache object in case a Rails
 app).
-If the :cached is omitted it will default to the value hold in
+If the :cached is omitted it will default to the value held in
 `Mas::Cms::Client.config.cache_gets`.
 If the :cached `nil` is passed the call will not be cached.
 
@@ -138,7 +152,7 @@ Mas::Cms::Category.all(cached: true)
 
 ## Redirect feature
 
-The following example show how to retrieve one cms resource with cache enable, redirection support and localisation:
+The following example shows how to retrieve a single localised cms resource with cache enabled and redirection support.
 
 ```ruby
 class ArticlesController < ApplicationController
@@ -158,20 +172,19 @@ end
 
 ### Handling exceptions
 
-In all the requests, the API can return http errors, so the gem raises custom
-exceptions for http errors in the calls.
+The MAS CMS API raises customs exceptions and returns http status error for bad requests.
 
 These are the exceptions that the gem raises:
 
-* Mas::Cms::Errors::ConnectionFailed
-* Mas::Cms::Errors::ClientError
-* Mas::Cms::Errors::ResourceNotFound
-* Mas::Cms::Errors::UnprocessableEntity
+  * Mas::Cms::Errors::ConnectionFailed
+  * Mas::Cms::Errors::ClientError
+  * Mas::Cms::Errors::ResourceNotFound
+  * Mas::Cms::Errors::UnprocessableEntity
 
 In order to handle the exception you need to catch those exceptions.
 
-An example below is try to use the Page Feedback API, trying
-to create a like for a page, handling an exception:
+This is an example of how the Page Feedback API will handle an exception raised
+as a result of trying to 'like' a page.
 
 ```ruby
 class PageFeedbackController < ApplicationController
@@ -190,10 +203,21 @@ end
 ```
 
 ## Development
+i. Checkout the repository
+  `git clone -b <name-of-branch> git@github.com:moneyadviceservice.git`
 
-After checking out the repo, run `bin/setup` to install dependencies. Then, run `rake spec` to run the tests. You can also run `bin/console` for an interactive prompt that will allow you to make requests using the entities.
+ii. Install dependencies
+  `bin/setup`
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+iii. Run all test
+  `rake spec`
+
+Optionally, you can also run `bin/console` for an interactive prompt that will allow you to make requests using the entities.
+
+### Release a New Version
+i. Update the version number in _lib/mas-cms-client/version.rb_.
+
+ii. Run `$ bundle exec rake release`. This will create a git tag for the newly added gem version, push all outstanding git commits and tags and push the `.gem` file to [rubygems.org](https://rubygems.org).
 
 ## License
 
