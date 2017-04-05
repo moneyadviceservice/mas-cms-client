@@ -172,7 +172,7 @@ end
 
 ### Handling exceptions
 
-The MAS CMS API raises customs exceptions and returns http status error for bad requests.
+The MAS CMS API raises custom exceptions and returns http status error for bad requests.
 
 These are the exceptions that the gem raises:
 
