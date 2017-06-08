@@ -16,7 +16,7 @@ module Mas::Cms
     end
 
     it { is_expected.to have_attributes(:type, :parent_id, :title, :description, :contents) }
-    it { is_expected.to have_attributes(:images, :links, :category_promos, :legacy_contents) }
+    it { is_expected.to have_attributes(:images, :links, :category_promos, :legacy_contents, :url_path) }
     it { is_expected.to validate_presence_of(:title) }
 
     specify { expect(subject).to_not be_home }
