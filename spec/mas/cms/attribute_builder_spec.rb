@@ -1,4 +1,5 @@
 # coding: utf-8
+
 require 'mas/cms/repository/cms/attribute_builder'
 
 module Mas::Cms::Repository::CMS

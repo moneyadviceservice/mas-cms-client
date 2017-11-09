@@ -17,7 +17,7 @@ module Mas::Cms
       private
 
       def build_contents(contents, options)
-        return [] unless contents.present?
+        return [] if contents.blank?
 
         contents.map do |item|
           klass = content_item_type_to_entity_class.fetch(item['type'], Other)
