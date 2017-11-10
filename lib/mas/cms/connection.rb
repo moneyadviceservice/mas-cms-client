@@ -64,10 +64,8 @@ module Mas
         yield blk
       rescue Faraday::Error::ResourceNotFound
         raise Errors::ResourceNotFound
-
       rescue Faraday::Error::ConnectionFailed
         raise Errors::ConnectionFailed
-
       rescue Faraday::Error::ClientError => error
         case error.response[:status]
         when 422

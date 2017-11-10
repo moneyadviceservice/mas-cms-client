@@ -80,6 +80,7 @@ The gems supports the following types:
   * Article
   * Action Plan
   * Corporate
+  * Category
   * News
   * Video
   * Home Page
@@ -99,6 +100,9 @@ Mas::Cms::ActionPlan.find('next-steps-if-you-cant-get-a-mortgage')
 
 Mas::Cms::Corporate.find('media-comment--money-mental-health-missing-link-report')
 # GET /api/en/action_plans/next-steps-if-you-cant-get-a-mortgage.json
+
+Mas::Cms::Category.find('pensions-and-retirement')
+# GET /api/en/categories/pensions-and-retirement.json
 
 Mas::Cms::News.find('new-rules-could-make-it-harder-to-get-a-payday-loan')
 # GET /api/en/news/new-rules-could-make-it-harder-to-get-a-payday-loan.json

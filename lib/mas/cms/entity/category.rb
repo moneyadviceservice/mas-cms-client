@@ -9,15 +9,15 @@ module Mas::Cms
     class << self
       def resource_attributes(response_body, options = {})
         body = response_body.dup
-        body[:contents] = build_contents(body[:contents], options)
-        body[:legacy_contents] = build_contents(body[:legacy_contents], options)
+        body['contents'] = build_contents(body['contents'], options)
+        body['legacy_contents'] = build_contents(body['legacy_contents'], options)
         body
       end
 
       private
 
       def build_contents(contents, options)
-        return [] unless contents.present?
+        return [] if contents.blank?
 
         contents.map do |item|
           klass = content_item_type_to_entity_class.fetch(item['type'], Other)
@@ -32,6 +32,7 @@ module Mas::Cms
       def content_item_type_to_entity_class
         {
           nil           => Category,
+          'category'    => Category,
           'guide'       => Article,
           'action_plan' => ActionPlan,
           'article'     => Article,
