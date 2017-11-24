@@ -13,6 +13,7 @@ module Mas
 
     autoload :ActionPlan, 'mas/cms/entity/action_plan'
     autoload :Article, 'mas/cms/entity/article'
+    autoload :ArticlePreview, 'mas/cms/entity/article_preview'
     autoload :ArticleLink, 'mas/cms/entity/article_link'
     autoload :Category, 'mas/cms/entity/category'
     autoload :Clump, 'mas/cms/entity/clump'
