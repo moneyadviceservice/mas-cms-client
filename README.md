@@ -78,6 +78,7 @@ Every page has its own type.
 The gems supports the following types:
 
   * Article
+  * Article Preview
   * Action Plan
   * Corporate
   * Category
@@ -94,6 +95,9 @@ Some examples of how to retrieve data from the CMS are given below.
 ```ruby
 Mas::Cms::Article.find('how-to-apply-for-a-mortgage')
 # GET /api/en/articles/how-to-apply-for-a-mortgage.json
+
+Mas::Cms::ArticlePreview.find('how-to-apply-for-a-mortgage')
+# GET /api/preview/en/how-to-apply-for-a-mortgage.json
 
 Mas::Cms::ActionPlan.find('next-steps-if-you-cant-get-a-mortgage')
 # GET /api/en/action_plans/next-steps-if-you-cant-get-a-mortgage.json
