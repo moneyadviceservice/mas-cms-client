@@ -10,7 +10,7 @@ group :test do
   gem 'faker', '~> 1.6'
   gem 'rake', '~> 12.0'
   gem 'rspec', '~> 3.0'
-  gem 'rubocop', '~> 0.47'
+  gem 'rubocop'
   gem 'shoulda-matchers', '~> 3.1'
   gem 'vcr', '~> 3.0.3'
   gem 'webmock', '~> 2.1'
