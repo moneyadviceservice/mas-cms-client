@@ -17,7 +17,7 @@ module Mas
           faraday.request :retry, max: config.retries
           faraday.request :user_agent, app: 'Mas-Cms-Client', version: Mas::Cms::Client::VERSION
           faraday.response :raise_error
-          faraday.response :json
+          faraday.response :json, parser_options: { quirks_mode: true }
           faraday.use :instrumentation
           faraday.token_auth config.api_token
           faraday.adapter Faraday.default_adapter
@@ -30,8 +30,8 @@ module Mas
         with_exception_support do
           request = ->(_) { raw_connection.get(path) }
           response = fetch_from_cache_or_request(path, cached, &request)
-
           raise HttpRedirect.new(response) if HttpRedirect.redirect?(response)
+          raise Errors::ResourceNotFound if response.body.nil?
           response
         end
       end

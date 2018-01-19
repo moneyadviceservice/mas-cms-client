@@ -29,7 +29,7 @@ RSpec.describe Mas::Cms::Connection do
 
   describe '.get' do
     let(:path)     { '/test/me.json' }
-    let(:response) { double(status: status, headers: {}) }
+    let(:response) { double(status: status, headers: {}, body: {}) }
     let(:status)   { 200 }
 
     context 'when successful and not cached' do
@@ -51,6 +51,15 @@ RSpec.describe Mas::Cms::Connection do
       let(:status) { 301 }
       it 'raises a `HttpRedirect` instance for http 301 status' do
         expect { connection.get(path) }.to raise_exception Mas::Cms::HttpRedirect
+      end
+    end
+
+    context 'when response body is null' do
+      let(:response) { double(status: status, headers: {}, body: nil) }
+      before { allow(connection.raw_connection).to receive(:get).and_return(response) }
+
+      it 'raises an `Mas::Cms::Connection::ResourceNotFound error' do
+        expect { connection.get(path) }.to raise_error(Mas::Cms::Errors::ResourceNotFound)
       end
     end
 
