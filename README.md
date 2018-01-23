@@ -85,6 +85,7 @@ The gems supports the following types:
   * News
   * Video
   * Home Page
+  * Home Page Preview
   * Footer
 
 The CMS API only support a GET request to pages at the moment
@@ -116,6 +117,9 @@ Mas::Cms::Video.find('budgeting-for-retirement')
 
 Mas::Cms::HomePage.find('the-money-advice-service')
 # GET /api/en/home_pages/the-money-advice-service.json
+
+Mas::Cms::HomePagePreview.find('the-money-advice-service')
+# GET /api/preview/en/home_pages/the-money-advice-service.json
 
 Mas::Cms::Footer.find('footer')
 # GET /api/en/footers/footer.json
