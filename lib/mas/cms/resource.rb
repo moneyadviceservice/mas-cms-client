@@ -47,7 +47,7 @@ module Mas
             path(slug: attributes[:slug], locale: attributes[:locale]),
             attributes
           ).body
-          new(body[:id], body)
+          new(body['id'], body)
         end
 
         def update(attributes = {})
@@ -55,7 +55,7 @@ module Mas
             path(slug: attributes[:slug], locale: attributes[:locale]),
             attributes
           ).body
-          new(body[:id], body)
+          new(body['id'], body)
         end
 
         private

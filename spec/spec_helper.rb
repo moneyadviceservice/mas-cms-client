@@ -6,7 +6,6 @@ require 'shoulda-matchers'
 require 'factory_girl'
 require 'faker'
 require 'vcr'
-require 'pry'
 
 Mas::Cms::Client.config do |c|
   c.timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
