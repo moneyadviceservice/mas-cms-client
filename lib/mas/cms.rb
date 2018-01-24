@@ -25,6 +25,7 @@ module Mas
     autoload :Entity, 'mas/cms/entity'
     autoload :Footer, 'mas/cms/entity/footer'
     autoload :HomePage, 'mas/cms/entity/home_page'
+    autoload :HomePagePreview, 'mas/cms/entity/home_page_preview'
     autoload :News, 'mas/cms/entity/news'
     autoload :NewsCollection, 'mas/cms/entity/news_collection'
     autoload :Other, 'mas/cms/entity/other'
