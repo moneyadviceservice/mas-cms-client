@@ -14,4 +14,5 @@ group :test do
   gem 'shoulda-matchers', '~> 3.1'
   gem 'vcr', '~> 3.0.3'
   gem 'webmock', '~> 2.1'
+  gem 'pry', '~> 0.11.2'
 end
