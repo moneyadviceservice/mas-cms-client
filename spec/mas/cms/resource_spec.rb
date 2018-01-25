@@ -162,17 +162,15 @@ RSpec.describe Mas::Cms::Resource do
   end
 
   describe '.create' do
-    let(:data_attributes) { { title: 'chuck norris', content: 'death once had a near chuck norris experience' } }
-    let(:conn) { spy(:http_connection, post: double(body: data_attributes)) }
-    let(:args) do
+    let(:data_attributes) do
       {
-        locale: 'en',
-        session_id: 'snthaoesrcaoehdusnaoteuh',
-        slug: 'how-to-train-your-dragon',
-        liked: true
+        'id' => 123,
+        'title' => 'chuck norris',
+        'content' => 'death once had a near chuck norris experience'
       }
     end
-    let(:entity) { entity_class.create(args) }
+    let(:conn) { spy(:http_connection, post: double(body: data_attributes)) }
+    let(:entity) { entity_class.create({}) }
 
     context 'when successful' do
       it 'returns a instance of entity_class' do
@@ -180,26 +178,21 @@ RSpec.describe Mas::Cms::Resource do
       end
 
       it 'entity instance has attributes set' do
-        expect(entity.title).to eq(data_attributes[:title])
-        expect(entity.content).to eq(data_attributes[:content])
+        expect(entity.as_json).to eq(data_attributes)
       end
     end
   end
 
   describe '.update' do
     let(:data_attributes) do
-      { title: 'chuck norris', content: 'death once had a near chuck norris experience' }
-    end
-    let(:conn) { spy(:http_connection, patch: double(body: data_attributes)) }
-    let(:args) do
       {
-        locale: 'en',
-        session_id: 'snthaoesrcaoehdusnaoteuh',
-        slug: 'how-to-train-your-dragon',
-        liked: true
+        'id' => 321,
+        'title' => 'chuck norris',
+        'content' => 'death once had a near chuck norris experience'
       }
     end
-    let(:entity) { entity_class.update(args) }
+    let(:conn) { spy(:http_connection, patch: double(body: data_attributes)) }
+    let(:entity) { entity_class.update({}) }
 
     context 'when successful' do
       it 'returns a instance of entity_class' do
@@ -207,8 +200,7 @@ RSpec.describe Mas::Cms::Resource do
       end
 
       it 'entity instance has attributes set' do
-        expect(entity.title).to eq(data_attributes[:title])
-        expect(entity.content).to eq(data_attributes[:content])
+        expect(entity.as_json).to eq(data_attributes)
       end
     end
   end
