@@ -1,5 +1,5 @@
 module Mas::Cms
-  class Video < Entity
+  class Video < Page
     include Mas::Cms::Resource
 
     attr_accessor :type, :title, :description, :body, :categories, :alternates
