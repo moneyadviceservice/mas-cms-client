@@ -33,6 +33,7 @@ module Mas
     autoload :StaticPage, 'mas/cms/entity/static_page'
     autoload :UniversalCredit, 'mas/cms/entity/universal_credit'
     autoload :Video, 'mas/cms/entity/video'
+    autoload :VideoPreview, 'mas/cms/entity/video_preview'
     autoload :WebChat, 'mas/cms/entity/web_chat'
 
     module Feedback
