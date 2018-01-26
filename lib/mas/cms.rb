@@ -1,4 +1,5 @@
 require 'mas/cms/connection'
+require 'mas/cms/preview'
 require 'mas/cms/resource'
 require 'mas/cms/client/version'
 require 'active_model'
