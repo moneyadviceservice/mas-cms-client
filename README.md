@@ -84,6 +84,7 @@ The gems supports the following types:
   * Category
   * News
   * Video
+  * Video Preview
   * Home Page
   * Home Page Preview
   * Footer
@@ -114,6 +115,9 @@ Mas::Cms::News.find('new-rules-could-make-it-harder-to-get-a-payday-loan')
 
 Mas::Cms::Video.find('budgeting-for-retirement')
 # GET /api/en/videos/budgeting-for-retirement.json
+
+Mas::Cms::VideoPreview.find('budgeting-for-retirement')
+# GET /api/preview/en/videos/budgeting-for-retirement.json
 
 Mas::Cms::HomePage.find('the-money-advice-service')
 # GET /api/en/home_pages/the-money-advice-service.json

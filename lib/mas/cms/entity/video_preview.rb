@@ -1,5 +1,5 @@
 module Mas::Cms
-  class HomePagePreview < HomePage
+  class VideoPreview < Video
     include Mas::Cms::Preview
   end
 end

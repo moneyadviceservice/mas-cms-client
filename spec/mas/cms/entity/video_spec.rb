@@ -1,5 +1,5 @@
 RSpec.describe Mas::Cms::Video, type: :model do
-  it_has_behavior 'a cms resource entity'
+  it_has_behavior 'a cms page entity'
 
   let(:params) do
     {
@@ -7,7 +7,7 @@ RSpec.describe Mas::Cms::Video, type: :model do
       title: 'awesome-title',
       description: 'awesome-description',
       body: 'awesome-body',
-      categories: %i(foo bar),
+      categories: %i[foo bar],
       alternates: [:cy]
     }
   end
@@ -18,7 +18,7 @@ RSpec.describe Mas::Cms::Video, type: :model do
 
   describe 'attributes' do
     it 'are set' do
-      %i(type title description body categories alternates).each do |attr|
+      %i[type title description body categories alternates].each do |attr|
         expect(subject.public_send(attr)).to eql(params[attr])
       end
     end
