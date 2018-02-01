@@ -1,10 +1,20 @@
 pipeline {
-    agent { dockerfile true }
+    agent {
+        dockerfile {
+            args '-u 0:0'
+        }
+    }
 
     stages {
         stage('Test') {
             steps {
-                sh('./test.sh')
+                sh('./script/test')
+            }
+        }
+        stage('Build') {
+            when { branch 'master'}
+            steps {
+                sh('./script/build')
             }
         }
     }
