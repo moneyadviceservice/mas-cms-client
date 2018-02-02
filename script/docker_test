@@ -1,0 +1,17 @@
+#!/bin/bash
+# Useful for testing in docker locally
+docker build -t mas-cms-client .
+docker run \
+    --interactive \
+    --tty \
+    --rm \
+    -v "$PWD:/var/tmp/app" \
+    -w /var/tmp/app \
+    mas-cms-client \
+        ./script/test
+
+if [ $? = 0 ]; then
+    echo "All required tests passed."
+else
+    echo "Test(s) failed."
+fi
