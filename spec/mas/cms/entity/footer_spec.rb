@@ -27,7 +27,7 @@ RSpec.describe Mas::Cms::Footer, type: :model do
       expect(subject.contact).to be_a(Mas::Cms::Contact)
     end
 
-    it "doesn't make multiple instances of contact if called multiple times" do
+    it 'doesn\'t make multiple instances of contact if called multiple times' do
       allow(Mas::Cms::Contact).to receive(:new).and_call_original
       3.times { subject.contact }
       expect(Mas::Cms::Contact).to have_received(:new).once
@@ -39,5 +39,23 @@ RSpec.describe Mas::Cms::Footer, type: :model do
     it { expect(subject.contact.additional_one).to eq('Monday to Friday, 8am to 8pm') }
     it { expect(subject.contact.additional_two).to eq('Saturday, 9am to 1pm') }
     it { expect(subject.contact.additional_three).to eq('Sunday and Bank Holidays, closed') }
+  end
+
+  describe '#web_chat' do
+    it 'returns a WebChat object' do
+      expect(subject.web_chat).to be_a(Mas::Cms::WebChat)
+    end
+
+    it 'doesn\'t make multiple instances of contact if called multiple times' do
+      allow(Mas::Cms::WebChat).to receive(:new).and_call_original
+      3.times { subject.web_chat }
+      expect(Mas::Cms::WebChat).to have_received(:new).once
+    end
+
+    it { expect(subject.web_chat.heading).to eq('Web Chat') }
+    it { expect(subject.web_chat.additional_one).to eq('Monday to Friday, 8am to 8pm') }
+    it { expect(subject.web_chat.additional_two).to eq('Saturday, 9am to 1pm') }
+    it { expect(subject.web_chat.additional_three).to eq('Sunday and Bank Holidays, closed') }
+    it { expect(subject.web_chat.small_print).to eq('some small print') }
   end
 end
