@@ -23,6 +23,7 @@ module Mas
     autoload :Corporate, 'mas/cms/entity/corporate'
     autoload :CorporateCategory, 'mas/cms/entity/corporate_category'
     autoload :Customer, 'mas/cms/entity/customer'
+    autoload :Document, 'mas/cms/entity/document'
     autoload :Entity, 'mas/cms/entity'
     autoload :Footer, 'mas/cms/entity/footer'
     autoload :HomePage, 'mas/cms/entity/home_page'

@@ -34,6 +34,9 @@ module Mas
 
         def all(locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
           response_body = http.get(path(slug: nil, locale: locale), cached: cached).body
+
+          response_body = response_body[root_name] if root_name
+
           response_body.map do |entity_attrs|
             new(
               entity_attrs.delete(:id),
@@ -41,6 +44,8 @@ module Mas
             )
           end
         end
+
+        def root_name; end
 
         def create(attributes = {})
           body = http.post(
