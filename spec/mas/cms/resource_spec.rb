@@ -23,6 +23,16 @@ RSpec.describe Mas::Cms::Resource do
     BarFoo
   end
 
+  let(:entity_with_root_name) do
+    class EntityWithRootName < Mas::Cms::Entity
+      include Mas::Cms::Resource
+
+      def self.root_name
+        :entity_with_root_name
+      end
+    end
+  end
+
   let(:modularized_entity) do
     module ModularizedEntity
       module Foo
@@ -135,6 +145,27 @@ RSpec.describe Mas::Cms::Resource do
       { locale: 'en' }
     end
     let(:entities) { entity_class.all(args) }
+
+    context 'when API response has a root node' do
+      let(:entity_class) do
+        entity_with_root_name
+        EntityWithRootName
+      end
+
+      let(:data_attributes) do
+        {
+          entity_with_root_name: [
+            { id: 1 },
+            { id: 2 }
+          ]
+        }
+      end
+
+      it 'returns a fully instantiated entities instance' do
+        expect(entities[0].id).to eq(1)
+        expect(entities[1].id).to eq(2)
+      end
+    end
 
     context 'when API call successful' do
       it 'returns an array of entity' do

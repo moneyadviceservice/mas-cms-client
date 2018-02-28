@@ -10,6 +10,7 @@ module Mas::Cms
     def web_chat
       @web_chat ||= Mas::Cms::WebChat.new(web_chat_options)
     end
+
     # BaseContentReader attempts to 'build categories', our entity
     # doesn't need them so lets stub out the behaviour to keep it happy.
     def categories

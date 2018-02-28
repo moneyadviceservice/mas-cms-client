@@ -88,6 +88,7 @@ The gems supports the following types:
   * Home Page
   * Home Page Preview
   * Footer
+  * Document
 
 The CMS API only support a GET request to pages at the moment
 and you can **find any page** by the following:
@@ -127,6 +128,9 @@ Mas::Cms::HomePagePreview.find('the-money-advice-service')
 
 Mas::Cms::Footer.find('footer')
 # GET /api/en/footers/footer.json
+
+Mas::Cms::Document.all
+# GET /api/en/documents.json
 ```
 
 ### Switching Locale
