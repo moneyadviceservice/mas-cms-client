@@ -179,7 +179,11 @@ RSpec.describe Mas::Cms::Resource do
 
       it 'query correct cms resource' do
         entities
-        expect(conn).to have_received(:get).with('/api/en/poker_card.json', cached: nil)
+        expect(conn).to have_received(:get).with(
+          '/api/en/poker_card.json',
+          params: nil,
+          cached: nil
+        )
       end
 
       context 'locale params defaults to `en`' do
@@ -187,6 +191,19 @@ RSpec.describe Mas::Cms::Resource do
 
         it 'returns an array of entity' do
           expect(entities).to all(be_an(A))
+        end
+      end
+
+      context 'send params' do
+        let(:args) { { params: { document_type: 'Insight' } } }
+
+        it 'pass the params to the get request' do
+          entities
+          expect(conn).to have_received(:get).with(
+            '/api/en/poker_card.json',
+            params: args[:params],
+            cached: nil
+          )
         end
       end
     end

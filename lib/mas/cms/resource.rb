@@ -32,8 +32,12 @@ module Mas
           new(slug, attributes)
         end
 
-        def all(locale: 'en', cached: Mas::Cms::Client.config.cache_gets)
-          response_body = http.get(path(slug: nil, locale: locale), cached: cached).body
+        def all(locale: 'en', cached: Mas::Cms::Client.config.cache_gets, params: nil)
+          response_body = http.get(
+            path(slug: nil, locale: locale),
+            params: params,
+            cached: cached
+          ).body
 
           response_body = response_body[root_name] if root_name
 

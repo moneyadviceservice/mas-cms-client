@@ -32,9 +32,21 @@ RSpec.describe Mas::Cms::Connection do
     let(:response) { double(status: status, headers: {}, body: {}) }
     let(:status)   { 200 }
 
+    context 'when sending params' do
+      let(:params) { { document_type: 'Insight' } }
+
+      it 'delegates to raw_connection with params' do
+        expect(connection.raw_connection).to receive(:get).with(
+          path,
+          params
+        ).and_return(response)
+        connection.get(path, params: params, cached: false)
+      end
+    end
+
     context 'when successful and not cached' do
       it 'delegates to raw_connection' do
-        expect(connection.raw_connection).to receive(:get).with(path).and_return(response)
+        expect(connection.raw_connection).to receive(:get).with(path, nil).and_return(response)
         connection.get(path, cached: false)
       end
     end
@@ -67,9 +79,10 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(path)
+          .with(path, nil)
           .and_raise(Faraday::Error::ResourceNotFound, 'foo')
       end
+
       it 'raises an `Mas::Cms::Connection::ResourceNotFound error' do
         expect { connection.get(path) }.to raise_error(Mas::Cms::Errors::ResourceNotFound)
       end
@@ -79,7 +92,7 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(path)
+          .with(path, nil)
           .and_raise(Faraday::Error::ConnectionFailed, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ConnectionFailed error' do
@@ -91,9 +104,10 @@ RSpec.describe Mas::Cms::Connection do
       before do
         allow(connection.raw_connection)
           .to receive(:get)
-          .with(path)
+          .with(path, nil)
           .and_raise(Faraday::Error::ClientError.new('foo', status: 500))
       end
+
       it 'raises an `Mas::Cms::Connection::ClientError error' do
         expect { connection.get(path) }.to raise_error(Mas::Cms::Errors::ClientError)
       end
