@@ -26,9 +26,9 @@ module Mas
       end
       # rubocop:enable Metrics/AbcSize
 
-      def get(path, cached: Mas::Cms::Client.config.cache_gets)
+      def get(path, cached: Mas::Cms::Client.config.cache_gets, params: nil)
         with_exception_support do
-          request = ->(_) { raw_connection.get(path) }
+          request = ->(_) { raw_connection.get(path, params) }
           response = fetch_from_cache_or_request(path, cached, &request)
           raise HttpRedirect.new(response) if HttpRedirect.redirect?(response)
           raise Errors::ResourceNotFound if response.body.nil?
