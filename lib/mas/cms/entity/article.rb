@@ -2,7 +2,16 @@ module Mas::Cms
   class Article < Page
     Alternate = Struct.new(:title, :url, :hreflang)
 
-    attr_accessor :type, :slug, :identifier, :title, :description, :body, :categories, :related_content, :supports_amp
+    attr_accessor :type,
+                  :slug,
+                  :identifier,
+                  :title,
+                  :description,
+                  :body,
+                  :categories,
+                  :related_content,
+                  :supports_amp,
+                  :non_content_blocks
     attr_reader :alternates
 
     validates_presence_of :title, :body

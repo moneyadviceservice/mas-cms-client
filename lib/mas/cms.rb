@@ -16,6 +16,7 @@ module Mas
     autoload :Article, 'mas/cms/entity/article'
     autoload :ArticlePreview, 'mas/cms/entity/article_preview'
     autoload :ArticleLink, 'mas/cms/entity/article_link'
+    autoload :Block, 'mas/cms/entity/block'
     autoload :Category, 'mas/cms/entity/category'
     autoload :Clump, 'mas/cms/entity/clump'
     autoload :ClumpLink, 'mas/cms/entity/clump_link'
