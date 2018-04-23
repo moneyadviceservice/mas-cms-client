@@ -18,16 +18,25 @@ module Mas::Cms
         ]
       }
     end
+    let(:non_content_blocks) { double }
+
     let(:attributes) do
       {
         title:       double,
         description: double,
         slug:        double,
         body:        double,
+        non_content_blocks: non_content_blocks,
         alternates:  [{ title: double, url: double, hreflang: double }],
         categories:  categories,
         related_content: related_content
       }
+    end
+
+    describe '#non_content_blocks' do
+      it 'returns extra blocks from attributes' do
+        expect(subject.non_content_blocks).to be(non_content_blocks)
+      end
     end
 
     describe '#previous_link' do

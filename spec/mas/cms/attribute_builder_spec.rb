@@ -82,6 +82,33 @@ module Mas::Cms::Repository::CMS
         end
       end
 
+      context 'when parsing another blocks than content' do
+        let(:body) { File.read('spec/fixtures/cms/article-components.json') }
+
+        it 'returns blocks excluding content' do
+          expect(subject['non_content_blocks']).to match_array(
+            [
+              Mas::Cms::Block.new(
+                identifier: 'component_hero_image',
+                content: '<p>/hero-sample.jpg</p>'
+              ),
+              Mas::Cms::Block.new(
+                identifier: 'component_cta_links',
+                content: 'cta links content'
+              ),
+              Mas::Cms::Block.new(
+                identifier: 'component_download',
+                content: 'something to be downloaded'
+              ),
+              Mas::Cms::Block.new(
+                identifier: 'component_feedback',
+                content: '<p>email@moneyadviceservice.org.uk</p>'
+              )
+            ]
+          )
+        end
+      end
+
       context 'home page' do
         let(:body) { File.read('spec/fixtures/cms/modifiable-home-page.json') }
 

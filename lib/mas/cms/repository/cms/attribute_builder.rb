@@ -19,6 +19,7 @@ module Mas::Cms::Repository
 
         assign_title_from_label(attributes)
         assign_body_from_content_block(attributes)
+        assign_blocks_excluding_content(attributes)
 
         translate_attributes_from_raw_blocks(attributes)
         group_nested_attributes(attributes)
@@ -38,6 +39,19 @@ module Mas::Cms::Repository
 
       def assign_body_from_content_block(attributes)
         attributes['body'] = BlockComposer.new(attributes['blocks']).to_html
+      end
+
+      def assign_blocks_excluding_content(attributes)
+        blocks_without_content = attributes['blocks'].select do |block|
+          block['identifier'] != 'content'
+        end
+
+        attributes['non_content_blocks'] = Array(blocks_without_content).map do |block|
+          ::Mas::Cms::Block.new(
+            identifier: block['identifier'],
+            content: block['content']
+          )
+        end
       end
 
       def assign_description(attributes)
