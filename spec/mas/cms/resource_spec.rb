@@ -146,6 +146,31 @@ RSpec.describe Mas::Cms::Resource do
     end
     let(:entities) { entity_class.all(args) }
 
+    context 'when API response has meta data' do
+      let(:data_attributes) do
+        {
+          entity_with_root_name: [
+            { id: 1 }
+          ],
+          meta: {
+            page: 1
+          }
+        }
+      end
+      let(:entity_class) do
+        entity_with_root_name
+        EntityWithRootName
+      end
+
+      it 'access the response body from the response' do
+        expect(entities.response_body).to eq(data_attributes)
+      end
+
+      it 'access the meta data' do
+        expect(entities.meta).to eq(page: 1)
+      end
+    end
+
     context 'when API response has a root node' do
       let(:entity_class) do
         entity_with_root_name

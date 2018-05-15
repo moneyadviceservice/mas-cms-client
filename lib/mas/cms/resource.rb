@@ -33,19 +33,27 @@ module Mas
         end
 
         def all(locale: 'en', cached: Mas::Cms::Client.config.cache_gets, params: nil)
-          response_body = http.get(
+          response = http.get(
             path(slug: nil, locale: locale),
             params: params,
             cached: cached
-          ).body
+          )
 
-          response_body = response_body[root_name] if root_name
-
-          response_body.map do |entity_attrs|
+          records = response_body(response).map do |entity_attrs|
             new(
               entity_attrs.delete(:id),
               resource_attributes(entity_attrs, locale: locale, cached: cached)
             )
+          end
+
+          ::Mas::Cms::ResponseCollection.new(records, response)
+        end
+
+        def response_body(response)
+          if root_name
+            response.body[root_name]
+          else
+            response.body
           end
         end
 
