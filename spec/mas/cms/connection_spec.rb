@@ -136,6 +136,25 @@ RSpec.describe Mas::Cms::Connection do
       end
     end
 
+    context 'when ssl error' do
+      let(:faraday_exception) do
+        Faraday::SSLError.new('SSL_connect returned=1 errno=0')
+      end
+
+      before do
+        allow(connection.raw_connection)
+          .to receive(:post)
+          .with(params)
+          .and_raise(faraday_exception)
+      end
+
+      it 'raises an `Mas::Cms::Connection::ClientError error' do
+        expect { connection.post(params) }.to raise_error(
+          Mas::Cms::Errors::ClientError
+        )
+      end
+    end
+
     context 'when client error' do
       before do
         allow(connection.raw_connection)
@@ -143,6 +162,7 @@ RSpec.describe Mas::Cms::Connection do
           .with(params)
           .and_raise(Faraday::Error::ClientError.new('foo', status: 500))
       end
+
       it 'raises an `Mas::Cms::Connection::ClientError error' do
         expect { connection.post(params) }.to raise_error(Mas::Cms::Errors::ClientError)
       end
@@ -155,6 +175,7 @@ RSpec.describe Mas::Cms::Connection do
           .with(params)
           .and_raise(Faraday::Error::ClientError.new('foo', status: 422))
       end
+
       it 'raises an `Mas::Cms::Connection::UnprocessableEntity error' do
         expect { connection.post(params) }.to raise_error(Mas::Cms::Errors::UnprocessableEntity)
       end
