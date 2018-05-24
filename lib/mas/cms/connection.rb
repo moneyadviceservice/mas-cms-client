@@ -67,7 +67,8 @@ module Mas
       rescue Faraday::Error::ConnectionFailed
         raise Errors::ConnectionFailed
       rescue Faraday::Error::ClientError => error
-        case error.response[:status]
+        response_status = error.response[:status] if error.response
+        case response_status
         when 422
           raise Errors::UnprocessableEntity
         else
