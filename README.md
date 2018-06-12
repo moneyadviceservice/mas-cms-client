@@ -82,21 +82,21 @@ Every page has its own type.
 
 The gems supports the following types:
 
+* Action Plan
 * Article
 * Article Preview
-* Action Plan
-* Corporate
 * Category
+* Corporate
+* Document
+* Evidence Summary Preview
+* Footer
+* Home Page
+* Home Page Preview
 * News
 * Video
 * Video Preview
-* Home Page
-* Home Page Preview
-* Footer
-* Document
 
-The CMS API supports a GET request to pages.
-
+The CMS API only supports GET requests to pages.
 Some examples of how to retrieve data from the CMS are given below.
 
 **find** any page:
@@ -117,14 +117,14 @@ Mas::Cms::Corporate.find('media-comment--money-mental-health-missing-link-report
 Mas::Cms::Category.find('pensions-and-retirement')
 # GET /api/en/categories/pensions-and-retirement.json
 
+Mas::Cms::EvidenceSummaryPreview.find('changing-behaviour-around-online-transactions')
+# GET /api/preview/en/changing-behaviour-around-online-transactions.json
+
+Mas::Cms::Footer.find('footer')
+# GET /api/en/footers/footer.json
+
 Mas::Cms::News.find('new-rules-could-make-it-harder-to-get-a-payday-loan')
 # GET /api/en/news/new-rules-could-make-it-harder-to-get-a-payday-loan.json
-
-Mas::Cms::Video.find('budgeting-for-retirement')
-# GET /api/en/videos/budgeting-for-retirement.json
-
-Mas::Cms::VideoPreview.find('budgeting-for-retirement')
-# GET /api/preview/en/videos/budgeting-for-retirement.json
 
 Mas::Cms::HomePage.find('the-money-advice-service')
 # GET /api/en/home_pages/the-money-advice-service.json
@@ -132,8 +132,11 @@ Mas::Cms::HomePage.find('the-money-advice-service')
 Mas::Cms::HomePagePreview.find('the-money-advice-service')
 # GET /api/preview/en/home_pages/the-money-advice-service.json
 
-Mas::Cms::Footer.find('footer')
-# GET /api/en/footers/footer.json
+Mas::Cms::Video.find('budgeting-for-retirement')
+# GET /api/en/videos/budgeting-for-retirement.json
+
+Mas::Cms::VideoPreview.find('budgeting-for-retirement')
+# GET /api/preview/en/videos/budgeting-for-retirement.json
 ```
 
 **all** documents or articles with:
