@@ -6,35 +6,40 @@ This library provides an application programming interface (API) for retrieving
 data from the MAS content management system.
 
 ## Features
-  - Content caching
-  - Loading locale-specific content
-  - Diagnosis for HTTP connections
+
+* Content caching
+* Loading locale-specific content
+* Diagnosis for HTTP connections
 
 ## Installation
 
 ### In Gemfile
+
 In order to install this as part of your application.
 
-1. Add this line to your application's Gemfile:
+1.  Add this line to your application's Gemfile:
 
 ```ruby
 gem 'mas-cms-client'
 ```
 
-2. Install using `bundler`:
+2.  Install using `bundler`:
 
     `$ bundle`
 
 ### In Local Ruby Gemset (1)
+
 Or install it as part of your global gemset:
 
     `$ gem install mas-cms-client`
 
 ### In Local Ruby Gemset (2)
+
 Install this gem onto your local machine,
-    `$ bundle exec rake install`
+`$ bundle exec rake install`
 
 ## Configuration
+
 The following example should help you to configure your application to fetch
 data from the content management system.
 
@@ -77,23 +82,24 @@ Every page has its own type.
 
 The gems supports the following types:
 
-  * Article
-  * Article Preview
-  * Action Plan
-  * Corporate
-  * Category
-  * News
-  * Video
-  * Video Preview
-  * Home Page
-  * Home Page Preview
-  * Footer
-  * Document
+* Article
+* Article Preview
+* Action Plan
+* Corporate
+* Category
+* News
+* Video
+* Video Preview
+* Home Page
+* Home Page Preview
+* Footer
+* Document
 
-The CMS API only support a GET request to pages at the moment
-and you can **find any page** by the following:
+The CMS API supports a GET request to pages.
 
 Some examples of how to retrieve data from the CMS are given below.
+
+**find** any page:
 
 ```ruby
 Mas::Cms::Article.find('how-to-apply-for-a-mortgage')
@@ -128,14 +134,27 @@ Mas::Cms::HomePagePreview.find('the-money-advice-service')
 
 Mas::Cms::Footer.find('footer')
 # GET /api/en/footers/footer.json
+```
+
+**all** documents or articles with:
+
+```ruby
+Mas::Cms::Article.all
+# GET /api/en/articles.json
 
 Mas::Cms::Document.all
 # GET /api/en/documents.json
 ```
 
+refine the **all** query by passing the document_type parameter:
+
+```ruby
+# GET /api/en/articles.json?document_type=thematic_review
+```
+
 ### Switching Locale
 
-The gem *uses 'en' locale* as default. But you can pass another locale as
+The gem _uses 'en' locale_ as default. But you can pass another locale as
 option:
 
 ```ruby
@@ -196,10 +215,10 @@ The MAS CMS API raises custom exceptions and returns http status error for bad r
 
 These are the exceptions that the gem raises:
 
-  * Mas::Cms::Errors::ConnectionFailed
-  * Mas::Cms::Errors::ClientError
-  * Mas::Cms::Errors::ResourceNotFound
-  * Mas::Cms::Errors::UnprocessableEntity
+* Mas::Cms::Errors::ConnectionFailed
+* Mas::Cms::Errors::ClientError
+* Mas::Cms::Errors::ResourceNotFound
+* Mas::Cms::Errors::UnprocessableEntity
 
 In order to handle the exception you need to catch those exceptions.
 
@@ -223,18 +242,20 @@ end
 ```
 
 ## Development
+
 i. Checkout the repository
-  `git clone -b <name-of-branch> git@github.com:moneyadviceservice.git`
+`git clone -b <name-of-branch> git@github.com:moneyadviceservice.git`
 
 ii. Install dependencies
-  `bin/setup`
+`bin/setup`
 
 iii. Run all test
-  `rake spec`
+`rake spec`
 
 Optionally, you can also run `bin/console` for an interactive prompt that will allow you to make requests using the entities.
 
 ### Release a New Version
+
 i. Update the version number in _lib/mas-cms-client/version.rb_.
 
 ii. Run `$ bundle exec rake release`. This will create a git tag for the newly added gem version, push all outstanding git commits and tags and push the `.gem` file to [rubygems.org](https://rubygems.org).
