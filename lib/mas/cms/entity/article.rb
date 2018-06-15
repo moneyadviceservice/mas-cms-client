@@ -14,6 +14,12 @@ module Mas::Cms
                   :non_content_blocks
     attr_reader :alternates
 
+    ROOT_NAME = 'documents'.freeze
+
+      def self.root_name
+        ROOT_NAME
+      end
+
     validates_presence_of :title, :body
 
     def alternates=(alternates)
