@@ -27,6 +27,7 @@ module Mas::Cms
         slug:        double,
         body:        double,
         non_content_blocks: non_content_blocks,
+        full_path:   double,
         alternates:  [{ title: double, url: double, hreflang: double }],
         categories:  categories,
         related_content: related_content

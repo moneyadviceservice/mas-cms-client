@@ -42,8 +42,8 @@ module Mas::Cms::Repository
       end
 
       def assign_blocks_excluding_content(attributes)
-        blocks_without_content = attributes['blocks'].select do |block|
-          block['identifier'] != 'content'
+        blocks_without_content = attributes['blocks'].reject do |block|
+          block['identifier'] == 'content'
         end
 
         attributes['non_content_blocks'] = Array(blocks_without_content).map do |block|

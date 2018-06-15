@@ -11,14 +11,15 @@ module Mas::Cms
                   :categories,
                   :related_content,
                   :supports_amp,
-                  :non_content_blocks
+                  :non_content_blocks,
+                  :full_path
     attr_reader :alternates
 
     ROOT_NAME = 'documents'.freeze
 
-      def self.root_name
-        ROOT_NAME
-      end
+    def self.root_name
+      ROOT_NAME
+    end
 
     validates_presence_of :title, :body
 
