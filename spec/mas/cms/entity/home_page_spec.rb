@@ -6,7 +6,7 @@ module Mas::Cms
     let(:attributes) { {} }
 
     it 'has correct attributes' do
-      %i(promo_banner_url promo_banner_url).each do |attr|
+      %i[promo_banner_url promo_banner_url].each do |attr|
         expect(subject).to respond_to(attr)
       end
     end
