@@ -17,11 +17,11 @@ module Mas::Cms
 
     ROOT_NAME = 'documents'.freeze
 
+    validates_presence_of :title, :body
+
     def self.root_name
       ROOT_NAME
     end
-
-    validates_presence_of :title, :body
 
     def alternates=(alternates)
       @alternates = alternates.map do |alternate|
