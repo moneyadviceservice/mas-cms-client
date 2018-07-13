@@ -12,7 +12,8 @@ module Mas::Cms
                   :related_content,
                   :supports_amp,
                   :non_content_blocks,
-                  :full_path
+                  :full_path,
+                  :tags
     attr_reader :alternates
 
     ROOT_NAME = 'documents'.freeze
