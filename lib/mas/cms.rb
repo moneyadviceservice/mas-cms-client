@@ -32,6 +32,7 @@ module Mas
     autoload :HomePage, 'mas/cms/entity/home_page'
     autoload :HomePagePreview, 'mas/cms/entity/home_page_preview'
     autoload :News, 'mas/cms/entity/news'
+    autoload :NewsPreview, 'mas/cms/entity/news_preview'
     autoload :NewsCollection, 'mas/cms/entity/news_collection'
     autoload :Other, 'mas/cms/entity/other'
     autoload :PageFeedback, 'mas/cms/entity/page_feedback'

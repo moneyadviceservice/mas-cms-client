@@ -93,6 +93,7 @@ The gems supports the following types:
 * Home Page
 * Home Page Preview
 * News
+* News Preview
 * Video
 * Video Preview
 
