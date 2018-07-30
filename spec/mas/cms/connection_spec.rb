@@ -150,7 +150,7 @@ RSpec.describe Mas::Cms::Connection do
 
       it 'raises an `Mas::Cms::Connection::ClientError error' do
         expect { connection.post(params) }.to raise_error(
-          Mas::Cms::Errors::ClientError
+          Mas::Cms::Errors::ClientError, 'SSL_connect returned=1 errno=0'
         )
       end
     end
