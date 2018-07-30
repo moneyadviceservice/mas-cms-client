@@ -72,7 +72,7 @@ module Mas
         when 422
           raise Errors::UnprocessableEntity
         else
-          raise Errors::ClientError
+          raise Errors::ClientError, error.message
         end
       end
 
