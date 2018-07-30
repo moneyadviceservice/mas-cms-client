@@ -10,5 +10,11 @@ require "mas/cms/client"
 # require "pry"
 # Pry.start
 
+Mas::Cms::Client.config do |c|
+  c.timeout = 10
+  c.open_timeout = 10
+  c.host = 'http://localhost:3000/'
+end
+
 require "irb"
 IRB.start
