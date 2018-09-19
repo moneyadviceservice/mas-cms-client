@@ -22,6 +22,7 @@ module Mas::Cms
       {
         title:       double,
         description: double,
+        meta_title:  double,
         slug:        double,
         body:        double,
         alternates:  [{ title: double, url: double, hreflang: double }],

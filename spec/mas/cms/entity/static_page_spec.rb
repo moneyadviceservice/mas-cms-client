@@ -6,12 +6,17 @@ module Mas::Cms
       {
         title:        double,
         description:  double,
+        meta_title:   double,
         body:         double,
         translations: [{ label: double, link: double('link').as_null_object, language: double }.stringify_keys]
       }
     end
 
-    it { is_expected.to have_attributes(:type, :title, :description, :body, :label, :meta_description, :translations) }
+    it do
+      is_expected.to have_attributes(
+        :type, :title, :description, :meta_description, :body, :label, :meta_description, :translations
+      )
+    end
 
     it { is_expected.to validate_presence_of(:title) }
 

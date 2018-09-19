@@ -24,6 +24,7 @@ module Mas::Cms
       {
         title:       double,
         description: double,
+        meta_title:  double,
         slug:        double,
         body:        double,
         non_content_blocks: non_content_blocks,
@@ -285,7 +286,7 @@ module Mas::Cms
       end
     end
 
-    it { is_expected.to have_attributes(:type, :title, :description, :body, :alternates) }
+    it { is_expected.to have_attributes(:type, :title, :description, :meta_title, :body, :alternates) }
     it { is_expected.to validate_presence_of(:title) }
     it { is_expected.to validate_presence_of(:body) }
 
@@ -340,6 +341,16 @@ module Mas::Cms
     describe '#redirect?' do
       it 'is falsey' do
         expect(subject.redirect?).to be_falsey
+      end
+    end
+
+    describe '#meta_description' do
+      let(:attributes) do
+        { description: 'something described' }
+      end
+
+      it 'is an alias for :description' do
+        expect(subject.meta_description).to eq 'something described'
       end
     end
   end

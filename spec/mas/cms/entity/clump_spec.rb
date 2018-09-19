@@ -7,12 +7,13 @@ module Mas::Cms
       {
         name:        double,
         description: double,
+        meta_title:  double,
         categories:  double,
         links:       double
       }
     end
 
-    it { is_expected.to have_attributes(:name, :description, :categories, :links) }
+    it { is_expected.to have_attributes(:name, :description, :meta_title, :categories, :links) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:description) }
 

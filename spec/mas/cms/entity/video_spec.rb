@@ -6,6 +6,7 @@ RSpec.describe Mas::Cms::Video, type: :model do
       type: 'no-idea-about-type',
       title: 'awesome-title',
       description: 'awesome-description',
+      meta_title: 'awesome-title',
       body: 'awesome-body',
       categories: %i[foo bar],
       alternates: [:cy]
