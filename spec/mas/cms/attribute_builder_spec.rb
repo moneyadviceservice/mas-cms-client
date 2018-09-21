@@ -26,6 +26,11 @@ module Mas::Cms::Repository::CMS
         expect(subject['description']).to eq(expected)
       end
 
+      it 'returns meta_title' do
+        expected = 'How to Manage Your Money – Beginner\'s Guide'
+        expect(subject['meta_title']).to eq(expected)
+      end
+
       it 'returns categories' do
         expected = ['managing-money', 'taking-control-of-debt'].map do |category_name|
           Mas::Cms::Category.new(category_name, {})

@@ -2,8 +2,8 @@ module Mas::Cms
   class StaticPage < Entity
     Alternate = Struct.new(:title, :url, :hreflang)
 
-    attr_accessor :type, :title, :description, :body, :label, :meta_description,
-                  :translations
+    attr_accessor :type, :title, :description, :meta_title,
+                  :body, :label, :meta_description, :translations
 
     validates_presence_of :title
 

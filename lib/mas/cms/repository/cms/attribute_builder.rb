@@ -25,6 +25,7 @@ module Mas::Cms::Repository
         group_nested_attributes(attributes)
 
         assign_description(attributes)
+        assign_meta_title(attributes)
         assign_categories(attributes)
         assign_alternates(attributes)
 
@@ -56,6 +57,10 @@ module Mas::Cms::Repository
 
       def assign_description(attributes)
         attributes['description'] = attributes['meta_description']
+      end
+
+      def assign_meta_title(attributes)
+        attributes['meta_title'] = attributes['meta_title']
       end
 
       def assign_categories(attributes)

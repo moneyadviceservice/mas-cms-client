@@ -7,6 +7,7 @@ module Mas::Cms
         title:       double,
         parent_id:   double,
         description: double,
+        meta_title:  double,
         contents:    double,
         images:      double,
         links:       double,
@@ -15,7 +16,7 @@ module Mas::Cms
       }
     end
 
-    it { is_expected.to have_attributes(:type, :parent_id, :title, :description, :contents) }
+    it { is_expected.to have_attributes(:type, :parent_id, :title, :description, :meta_title, :contents) }
     it { is_expected.to have_attributes(:images, :links, :category_promos, :legacy_contents, :url_path) }
     it { is_expected.to validate_presence_of(:title) }
 

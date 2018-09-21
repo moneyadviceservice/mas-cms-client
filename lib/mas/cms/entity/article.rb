@@ -7,6 +7,7 @@ module Mas::Cms
                   :identifier,
                   :title,
                   :description,
+                  :meta_title,
                   :body,
                   :categories,
                   :related_content,
@@ -15,6 +16,8 @@ module Mas::Cms
                   :full_path,
                   :tags
     attr_reader :alternates
+
+    alias_method :meta_description, :description
 
     ROOT_NAME = 'documents'.freeze
 

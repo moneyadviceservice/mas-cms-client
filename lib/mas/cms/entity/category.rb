@@ -1,9 +1,9 @@
 module Mas::Cms
   class Category < Entity
     include Mas::Cms::Resource
-    attr_accessor :type, :parent_id, :title, :description, :contents,
-                  :third_level_navigation, :images, :links, :category_promos,
-                  :legacy_contents, :legacy, :url_path
+    attr_accessor :type, :parent_id, :title, :description, :meta_title,
+                  :contents, :third_level_navigation, :images, :links,
+                  :category_promos, :legacy_contents, :legacy, :url_path
     validates_presence_of :title
 
     class << self

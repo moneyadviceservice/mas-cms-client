@@ -1,7 +1,8 @@
 module Mas::Cms
   class Clump < Entity
     include Mas::Cms::Resource
-    attr_accessor :name, :description, :categories, :links
+    attr_accessor :name, :description, :meta_title,
+                  :categories, :links
     validates_presence_of :name, :description
 
     def attributes

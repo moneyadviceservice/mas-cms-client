@@ -2,8 +2,8 @@ module Mas::Cms
   class HomePage < Page
     Alternate = Struct.new(:title, :url, :hreflang)
 
-    attr_accessor :type, :slug, :identifier, :title, :description, :body,
-                  :categories, :related_content, :promo,
+    attr_accessor :type, :slug, :identifier, :title, :description,
+                  :meta_title, :body, :categories, :related_content, :promo,
                   :heading, :hero_image,
                   :bullet_1, :bullet_2, :bullet_3,
                   :cta_text, :cta_link,
