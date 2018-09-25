@@ -33,8 +33,9 @@ RUN \curl -#LO https://rvm.io/mpapis.asc && gpg --import mpapis.asc && \
 RUN /bin/bash -lc "rvm requirements" && \
   /bin/bash -lc  "rvm install $(cat .ruby-version) && rvm use $(cat .ruby-version) --default"
 
-#Install Bundler
+#Install Bundler & Geminabox
 RUN /bin/bash -lc "gem install -v ${BUNDLER_VERSION} bundler"
+RUN /bin/bash -lc "gem install geminabox"
 
 #Install Node
 RUN curl https://nodejs.org/dist/v${NODE_VERSION}/node-v${NODE_VERSION}-linux-x64.tar.gz \
