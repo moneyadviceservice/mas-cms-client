@@ -6,6 +6,8 @@ gemspec
 
 group :test do
   gem 'bundler', '~> 1.11'
+  gem 'danger', require: false
+  gem 'danger-rubocop', require: false
   gem 'factory_girl', '~> 4.7'
   gem 'faker', '~> 1.6'
   gem 'rake', '~> 12.0'
