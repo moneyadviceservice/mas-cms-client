@@ -1,7 +1,5 @@
-# coding: utf-8
+$LOAD_PATH.push File.expand_path('lib', __dir__)
 
-lib = File.expand_path('../lib', __FILE__)
-$LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'mas/cms/client/version'
 
 Gem::Specification.new do |spec|

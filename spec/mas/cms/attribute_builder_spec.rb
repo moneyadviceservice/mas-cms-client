@@ -1,5 +1,3 @@
-# coding: utf-8
-
 require 'mas/cms/repository/cms/attribute_builder'
 
 module Mas::Cms::Repository::CMS
@@ -73,6 +71,7 @@ module Mas::Cms::Repository::CMS
       it 'body is html' do
         # rubocop:disable LineLength
         expect(subject['body']).to include('<p><strong>Good money management can mean many things – from living within your means to saving for short and long-term goals, to having a realistic plan to pay off your debts. Read on if you want to learn how to set up a budget, make the most of your money, pay off debts or start saving.</strong></p>')
+        # rubocop:enable LineLength
       end
 
       context 'when passing another options' do

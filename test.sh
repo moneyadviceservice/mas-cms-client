@@ -31,7 +31,7 @@ function info {
 }
 
 run ./bin/setup
-run bundle exec rubocop .
+run bundle exec rubocop . --fail-level error
 run bundle exec rspec
 
 if [ -f /.dockerenv ]; then
