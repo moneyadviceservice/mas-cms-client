@@ -5,23 +5,17 @@ module Mas::Cms
 
     let(:attributes) do
       {
-        name:        double,
+        name: double,
         description: double,
-        meta_title:  double,
-        categories:  double,
-        links:       double
+        meta_title: double,
+        categories: double,
+        links: double
       }
     end
 
     it { is_expected.to have_attributes(:name, :description, :meta_title, :categories, :links) }
     it { is_expected.to validate_presence_of(:name) }
     it { is_expected.to validate_presence_of(:description) }
-
-    describe '.api_prefix' do
-      it 'returns nil' do
-        expect(described_class.api_prefix).to be(nil)
-      end
-    end
 
     describe '.resource_attributes' do
       let(:entity_attrs) do
