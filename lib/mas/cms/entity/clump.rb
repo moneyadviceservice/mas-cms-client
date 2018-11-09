@@ -15,8 +15,6 @@ module Mas::Cms
     end
 
     class << self
-      def api_prefix; end
-
       def resource_attributes(response_body, _)
         body = response_body.dup
         body['categories'] = Array(body['categories']).map { |category| build_category(category) }
