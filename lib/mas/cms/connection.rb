@@ -32,6 +32,7 @@ module Mas
           response = fetch_from_cache_or_request(path, cached, &request)
           raise HttpRedirect.new(response) if HttpRedirect.redirect?(response)
           raise Errors::ResourceNotFound if response.body.nil?
+
           response
         end
       end

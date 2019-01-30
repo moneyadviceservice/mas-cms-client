@@ -17,7 +17,7 @@ module Mas::Cms
                   :tags
     attr_reader :alternates
 
-    alias_method :meta_description, :description
+    alias meta_description description
 
     ROOT_NAME = 'documents'.freeze
 
@@ -27,6 +27,11 @@ module Mas::Cms
       ROOT_NAME
     end
 
+    EXCLUDED_FROM_FEEDBACK = [
+      'baby-costs-calculator',
+      'cyfrifiannell-costau-babi',
+      'debt-management-companies'
+    ].freeze
     def alternates=(alternates)
       @alternates = alternates.map do |alternate|
         Alternate.new(*alternate.values_at(:title, :url, :hreflang))
@@ -61,12 +66,6 @@ module Mas::Cms
       false
     end
 
-    EXCLUDED_FROM_FEEDBACK = [
-      'baby-costs-calculator',
-      'cyfrifiannell-costau-babi',
-      'debt-management-companies'
-    ].freeze
-
     def accepts_feedback?
       !EXCLUDED_FROM_FEEDBACK.include?(slug)
     end
@@ -75,6 +74,7 @@ module Mas::Cms
 
     def build_article_links(key)
       return [] if related_content.blank? || related_content[key].blank?
+
       related_content[key].map do |link_data|
         build_article_link link_data
       end
