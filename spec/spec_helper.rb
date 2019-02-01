@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift File.expand_path('../../lib', __FILE__)
+$LOAD_PATH.unshift File.expand_path('../lib', __dir__)
 require 'mas/cms/client'
 
 require 'webmock/rspec'
@@ -8,8 +8,8 @@ require 'faker'
 require 'vcr'
 
 Mas::Cms::Client.config do |c|
-  c.timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
-  c.open_timeout =  (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
+  c.timeout = (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
+  c.open_timeout = (ENV['FRONTEND_HTTP_REQUEST_TIMEOUT'] ||= '10')
   c.api_token =  (ENV['MAS_CMS_API_TOKEN'] ||= 'mytoken')
   c.host =  (ENV['MAS_CMS_URL'] ||= 'http://localhost:3000')
   c.retries = 1

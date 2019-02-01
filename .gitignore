@@ -1,3 +1,4 @@
 .bundle
 Gemfile.lock
 mas-cms-client-*.gem
+.rubocop-*
