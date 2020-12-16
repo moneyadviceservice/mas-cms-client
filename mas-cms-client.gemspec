@@ -29,5 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'faraday', '~> 0.9.2'
   spec.add_runtime_dependency 'faraday-conductivity', '~> 0.3.1'
   spec.add_runtime_dependency 'faraday_middleware', '~> 0.12.2'
-  spec.add_runtime_dependency 'rubytree', '~> 0.9.7'
+  spec.add_runtime_dependency 'rubytree', '~> 1.0.0'
 end
