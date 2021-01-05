@@ -1,3 +1,25 @@
 inherit_from:
 - https://raw.githubusercontent.com/moneyadviceservice/mas-standards/master/.rubocop.yml
 - .rubocop_todo.yml
+Metrics/LineLength:
+  Max: 140
+Rails/UnknownEnv:
+  Environments:
+    - production
+    - development
+    - test
+    - uat
+    - qa
+    - preview
+    - cultivate
+AllCops:
+  Exclude:
+    - 'Rakefile'
+    - 'config/**/*'
+    - 'db/**/*'
+    - 'Guardfile'
+    - 'script/**/*'
+    - 'tmp/**/*'
+    - 'vendor/**/*'
+    - 'spec/dummy/**/*'
+    - 'features/**/*'
