@@ -7,7 +7,7 @@ module Mas::Cms::Repository::CMS
     let(:options) { { locale: 'en' } }
 
     describe '.build' do
-      subject { AttributeBuilder.build(response.body, options) }
+      subject { AttributeBuilder.build(response.body, **options) }
 
       it 'instantiate an attribute builder passing response and options' do
         attribute_builder = double(attributes: {})

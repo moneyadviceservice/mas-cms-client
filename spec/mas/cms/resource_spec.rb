@@ -84,7 +84,7 @@ RSpec.describe Mas::Cms::Resource do
         cached: false
       }
     end
-    let(:entity) { entity_class.find(slug, find_options) }
+    let(:entity) { entity_class.find(slug, **find_options) }
 
     context 'when API call successful' do
       it 'returns an instance of entity' do
@@ -116,7 +116,7 @@ RSpec.describe Mas::Cms::Resource do
     end
 
     context 'when specific entity class' do
-      let(:entity) { specific_entity_class.find(slug, find_options) }
+      let(:entity) { specific_entity_class.find(slug, **find_options) }
 
       it 'overwrites original parser' do
         expect(entity.call_to_action).to eq(data_attributes[:title])
@@ -144,7 +144,7 @@ RSpec.describe Mas::Cms::Resource do
     let(:args) do
       { locale: 'en' }
     end
-    let(:entities) { entity_class.all(args) }
+    let(:entities) { entity_class.all(**args) }
 
     context 'when API response has meta data' do
       let(:data_attributes) do
