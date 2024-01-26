@@ -5,8 +5,6 @@ ruby File.read('.ruby-version', &:readline)
 gemspec
 
 group :test do
-  gem 'danger', require: false
-  gem 'danger-rubocop', require: false
   gem 'factory_girl', '~> 4.7'
   gem 'faker', '~> 1.6'
   gem 'rake', '~> 12.0'
