@@ -42,7 +42,7 @@ module Mas::Cms
         end
 
         it 'calls find on Category resource with locales' do
-          expect(Category).to receive(:find).with('making-will', locale: 'cy', cached: true)
+          expect(Category).to receive(:find).with('making-will', { locale: 'cy', cached: true })
           Category.resource_attributes(response.body, locale: 'cy', cached: true)
         end
       end

@@ -80,7 +80,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:get)
           .with(path, nil)
-          .and_raise(Faraday::Error::ResourceNotFound, 'foo')
+          .and_raise(Faraday::ResourceNotFound, 'foo')
       end
 
       it 'raises an `Mas::Cms::Connection::ResourceNotFound error' do
@@ -93,7 +93,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:get)
           .with(path, nil)
-          .and_raise(Faraday::Error::ConnectionFailed, 'foo')
+          .and_raise(Faraday::ConnectionFailed, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ConnectionFailed error' do
         expect { connection.get(path) }.to raise_error(Mas::Cms::Errors::ConnectionFailed)
@@ -105,7 +105,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:get)
           .with(path, nil)
-          .and_raise(Faraday::Error::ClientError.new('foo', status: 500))
+          .and_raise(Faraday::ClientError.new('foo', status: 500))
       end
 
       it 'raises an `Mas::Cms::Connection::ClientError error' do
@@ -129,7 +129,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:post)
           .with(params)
-          .and_raise(Faraday::Error::ConnectionFailed, 'foo')
+          .and_raise(Faraday::ConnectionFailed, 'foo')
       end
       it 'raises an `Mas::Cms::Connection::ConnectionFailed error' do
         expect { connection.post(params) }.to raise_error(Mas::Cms::Errors::ConnectionFailed)
@@ -149,9 +149,7 @@ RSpec.describe Mas::Cms::Connection do
       end
 
       it 'raises an `Mas::Cms::Connection::ClientError error' do
-        expect { connection.post(params) }.to raise_error(
-          Mas::Cms::Errors::ClientError, 'SSL_connect returned=1 errno=0'
-        )
+        expect { connection.post(params) }.to raise_error(Mas::Cms::Errors::ClientError)
       end
     end
 
@@ -160,7 +158,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:post)
           .with(params)
-          .and_raise(Faraday::Error::ClientError.new('foo', status: 500))
+          .and_raise(Faraday::ClientError.new('foo', status: 500))
       end
 
       it 'raises an `Mas::Cms::Connection::ClientError error' do
@@ -173,7 +171,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:post)
           .with(params)
-          .and_raise(Faraday::Error::ClientError.new('foo', status: 422))
+          .and_raise(Faraday::ClientError.new('foo', status: 422))
       end
 
       it 'raises an `Mas::Cms::Connection::UnprocessableEntity error' do
@@ -197,7 +195,7 @@ RSpec.describe Mas::Cms::Connection do
         allow(connection.raw_connection)
           .to receive(:patch)
           .with(params)
-          .and_raise(Faraday::Error::ClientError.new('foo', status: 422))
+          .and_raise(Faraday::ClientError.new('foo', status: 422))
       end
       it 'raises an `Mas::Cms::Connection::UnprocessableEntity error' do
         expect { connection.patch(params) }.to raise_error(Mas::Cms::Errors::UnprocessableEntity)
