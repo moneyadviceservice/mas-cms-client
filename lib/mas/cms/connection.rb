@@ -63,11 +63,11 @@ module Mas
 
       def with_exception_support(&blk)
         yield blk
-      rescue Faraday::Error::ResourceNotFound
+      rescue Faraday::ResourceNotFound
         raise Errors::ResourceNotFound
-      rescue Faraday::Error::ConnectionFailed
+      rescue Faraday::ConnectionFailed
         raise Errors::ConnectionFailed
-      rescue Faraday::Error::ClientError => error
+      rescue Faraday::ClientError => error
         response_status = error.response[:status] if error.response
         case response_status
         when 422
@@ -75,6 +75,8 @@ module Mas
         else
           raise Errors::ClientError, error.message
         end
+      rescue Faraday::SSLError => error
+        raise Errors::ClientError, error.message
       end
 
       def fetch_from_cache_or_request(path, cached, &request)

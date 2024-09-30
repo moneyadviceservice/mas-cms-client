@@ -2,7 +2,7 @@ FactoryGirl.define do
   factory :category, class: Mas::Cms::Category do
     sequence(:id) { |i| "category-#{i}" }
     title { id.capitalize.sub(/-/, ' ') }
-    description { Faker::Lorem.paragraph(1) }
+    description { Faker::Lorem.paragraphs(number: 1) }
     contents []
     legacy_contents []
     legacy false
